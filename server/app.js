@@ -23,7 +23,7 @@ app.use(bodyParser.json())
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.use('/home', HomeRouter);
+app.use('/', HomeRouter);
 app.use('/books', BooksRouter);
 app.use('/profile', ProfileRouter);
 app.use('/loginPage', LoginRouter);
