@@ -3,12 +3,12 @@ var prof = express.Router();
 var controlador = require('../controllers/ProfileController');
 
 
-prof.delete('/profile/delete/:codUsuario', controlador.profDelete );
+prof.delete('/delete/:codUsuario', controlador.profDelete );
 
-prof.put('/profile/modify/:codUsuario', controlador.profMody );
+prof.put('/modify/:codUsuario', controlador.profMody );
 
-prof.post('/profile/consultaFavorito', controlador.conFav );
+prof.post('/consultaFavorito', controlador.conFav );
 
-prof.get('/profile/lastFavorite/:codUsuario', controlador.lastFav );
+prof.get('/lastFavorite/:codUsuario', controlador.lastFav );
 
 module.exports = prof;

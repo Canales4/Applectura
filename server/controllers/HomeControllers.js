@@ -86,3 +86,5 @@ class HomeControllers {
     });
   };
 }
+
+module.exports = HomeControllers = new HomeControllers();

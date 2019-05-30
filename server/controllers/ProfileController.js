@@ -53,3 +53,5 @@ class ProfileController {
   };
 
 }
+
+module.exports = ProfileController = new ProfileController();

@@ -1,7 +1,5 @@
-const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-users.use(cors());
 var db = require('../database/db');
 process.env.SECRET_KEY = 'secret'
 
@@ -99,3 +97,5 @@ class LoginController{
     })
   };
 }
+
+module.exports = LoginController = new LoginController();

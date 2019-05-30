@@ -1,5 +1,7 @@
 var express = require('express');
+const cors = require('cors');
 var login = express.Router();
+login.use(cors());
 var controlador = require('../controllers/LoginController');
 
 

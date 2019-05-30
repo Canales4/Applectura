@@ -152,3 +152,5 @@ class BooksControllers{
     }
   };
 }
+
+module.exports = BooksControllers = new BooksControllers();
