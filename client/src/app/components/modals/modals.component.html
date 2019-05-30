@@ -1,0 +1,17 @@
+<button type="button" class="btn btn-primary" (click)="openModal(template)">Create template modal</button>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Eliminar perfil</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+        ¿Está seguro de que quiere eliminar su perfil?
+        <div class="modal-delete-button">
+            <button type="button" class="btn btn-primary text-white text-white mt-2 ml-2 " (click)="modalRef.hide()">No</button>
+            <button type="button" class="btn btn-danger text-white text-white mt-2 ml-2">Sí</button>
+        </div>
+    </div>
+</ng-template>

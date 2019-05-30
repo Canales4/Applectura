@@ -1,0 +1,31 @@
+<!-- Formulario de Registro -->
+<form #signUpForm="ngForm" (ngSubmit)="signUpForm.valid && register()">
+
+  <input type="text" #nomUsuario="ngModel" [(ngModel)]="credentials.nomUsuario" name="nomUsuario"
+    placeholder="Introduce nombre" required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !nomUsuario.valid }">
+
+  <!-- mensajes de validacion de nombre, comprueba que no este vacio y que sea valido -->
+  <div *ngIf="signUpForm.submitted && !nomUsuario.valid">
+    <label class="validation-message">El usuario es requerido</label>
+  </div>
+
+  <input type="text" #email="ngModel" [(ngModel)]="credentials.email" name="email" placeholder="Introduce email"
+    required [pattern]="emailRegex" [ngClass]="{'invalid-textbox' :signUpForm.submitted && !email.valid }">
+
+  <!-- mensajes de validacion de email, comprueba que no este vacio y que sea valido-->
+  <div *ngIf="signUpForm.submitted && !email.valid">
+    <label class="validation-message">El email es requerido <br> Debe tener formato valido</label>
+  </div>
+
+  <input type="password" #contrasena="ngModel" [(ngModel)]="credentials.contrasena" name="contrasena"
+    placeholder="introduce contraseña" required minlength="4"
+    [ngClass]="{'invalid-textbox' :signUpForm.submitted && !contrasena.valid }">
+
+  <!-- mensajes de validacion de contraseña, comprueba que no este vacio y que sea valido -->
+  <div *ngIf="signUpForm.submitted && !contrasena.valid">
+    <label class="validation-message">La contraseña es requerida <br> Minimo 4 caracteres</label>
+  </div>
+
+  <input type="submit" value="Registrate">
+
+</form>

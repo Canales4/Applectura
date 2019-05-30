@@ -1,0 +1,28 @@
+<!-- Formulario de login -->
+<form #signInForm="ngForm" (ngSubmit)="signInForm.valid && login() ">
+
+  <input type="text" name="email" #email="ngModel" [(ngModel)]="credentials.email" placeholder="Introduce email"
+    required [pattern]="emailRegex" [ngClass]="{'invalid-textbox' :signInForm.submitted && !email.valid }">
+
+  <!-- mensajes de validacion de email,comprueba que no este vacio y que sea valido -->
+  <div *ngIf="signInForm.submitted && !email.valid">
+    <label class="validation-message">El email es requerido <br> Debe tener formato valido</label>
+  </div>
+
+  <input type="password" #contrasena="ngModel" [(ngModel)]="credentials.contrasena" name="contrasena"
+    placeholder="Introduce contraseña" required minlength="4"
+    [ngClass]="{'invalid-textbox' :signInForm.submitted && !contrasena.valid }">
+
+  <!-- mensajes de validacion de contraseña,comprueba que no este vacio y que sea valido -->
+  <div *ngIf="signInForm.submitted && !contrasena.valid">
+    <label class="validation-message">La contraseña es requerida <br> Debe tener minimo 4 caracteres</label>
+  </div>
+
+  <!-- mensaje que se muestra si el envio da error -->
+  <div id="ErroInfo" class="d-none">
+    <label>El email o la contraseña no son correctos</label>
+  </div>
+
+  <input type="submit" value="Entrar">
+  
+</form>

@@ -1,0 +1,104 @@
+<div class="row no-gutters container-fluid mt-3  ">
+  <div class="col-md-1 ">
+  </div>
+
+  <div class="col-md-10 ">
+    <div class="jumbotron jumbotron-fluid container-fluid rounded colorfondo">
+      <div class="row no-gutters   container-fluid  ">
+        <div class="col-md-6 pl-3">
+          <h1 class="display-4 pt-3 pl-3">App Lectores</h1>
+          <p class="lead p-3">En nuestra aplicación podra hacer todo lo que un buen lector espera tener a mano, entra y
+            disfruta .</p>
+          <!-- ACORDEON -->
+          <div class="accordion col-md-8 " id="accordionExample">
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                  <button class="btn btn-link efectB2" type="button" data-toggle="collapse" data-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+                    <img src="https://img.icons8.com/wired/30/000000/search.png"> Buscar libros
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                  En esta aplicación podra buscar sus libros preferidos, ver información sobre ellos y de los autores
+                  que les interesan
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed efectB2 " type="button" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <img src="https://img.icons8.com/wired/30/000000/bookmark.png"> Crear biblioteca
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                  Podra almacenar sus libros preferidos, para llevar un control de los libros que esta leyendo ha leido
+                  o quiere leer en un futuro
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed efectB2" type="button" data-toggle="collapse"
+                    data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <img src="https://img.icons8.com/wired/30/000000/talk-male.png"> Comunidad
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+                  Comparte tus opiniones sobre los libros que ha leido mira la de otros usuarios y vota segun su opinion
+                  tras la lectura
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed efectB2" type="button" data-toggle="collapse"
+                    data-target="#collapsefour" aria-expanded="false" aria-controls="collapseTwo">
+                    <img src="https://img.icons8.com/wired/30/000000/conference.png">Club
+                  </button>
+                </h2>
+              </div>
+              <div id="collapsefour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                  Podra crear una comunidad de lectores donde poder conocer gente nueva y compartir lecturas comunes.
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- FIN ACORDEON -->
+          
+        </div>
+        <div class="col-md-1 ">
+        </div>
+
+        <!-- FORMULARIO -->
+        <div class="col-md-5 ">
+          <div id="formContent" class="container-fluid colorlog fadeInDown">
+            <button class="underlineHover btn btn-link efectB" routerLink="/login" routerLinkActive="active">
+              Login</button>
+            <button class="underlineHover btn btn-link efectB" routerLink="/signup"
+              routerLinkActive="active">Registrate</button>
+            <div>
+              <img src="https://img.icons8.com/bubbles/200/000000/books.png" id="icon" alt="LoginIcon" />
+            </div>
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+        <!-- FIN FORMULARIO -->
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1 ">
+  </div>
+
+</div>

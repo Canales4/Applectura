@@ -1,0 +1,14 @@
+/* CSS para icono de salir */
+
+.salir {
+  text-align: right;
+  padding-top: 1vw;
+}
+
+/* Adaptación para pantallas pequeñas */
+
+@media (min-width: 601px) {
+  .menu {
+    visibility: hidden;
+  }
+}

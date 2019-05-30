@@ -1,0 +1,322 @@
+<div class="container-fluid bg-azulc4 rounded-des font-rale">
+
+    <div id="mr-4" class="container pt-4">
+
+
+        <div id="mr-4" class="row animated fadeIn fast ml-8">
+            <!-- ICONO Y BOTONES DE ELIMINAR Y MODIFICAR -->
+            <div class="col-md-4 ">
+
+                <div class="container">
+                    <img [src]="icono" name="icono" class="img-fluid imgShadow border border-light" alt="icono de perfil">
+                </div>
+
+                <br><br>
+                <button type="button" (click)="openModal(modify)" class="btn btn-verdec imgShadow btn-block text-dark"><img src="https://img.icons8.com/wired/32/000000/edit.png" alt="modify" style="padding-right: 0.5vw;">Modificar
+                perfil</button>
+                <ng-template #modify>
+                    <div class="modal-header">
+                        <h4 class="modal-title pull-left">Modificar perfil</h4>
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <!-- MODAL PARA MODIFICAR -->
+                    <div class="modal-body">
+                        <form>
+
+                            <form>
+                                <div class="form-group">
+                                    <label>Alias</label>
+                                    <input [(ngModel)]="profile.alias" type="text" class="form-control" name="nombre" placeholder="{{ details?.alias }}">
+                                </div>
+                            </form>
+
+                            <form>
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input [(ngModel)]="profile.nomUsuario" type="text" class="form-control" name="nombre" placeholder="{{ details?.nomUsuario }}">
+                                </div>
+                            </form>
+
+                            <form>
+                                <div class="form-group">
+                                    <label>Primer apellido</label>
+                                    <input [(ngModel)]="profile.apellido1" type="text" class="form-control" name="nombre" placeholder="{{ details?.apellido1 }}">
+                                </div>
+                            </form>
+
+                            <form>
+                                <div class="form-group">
+                                    <label>Segundo apellido</label>
+                                    <input [(ngModel)]="profile.apellido2" type="text" class="form-control" name="nombre" placeholder="{{ details?.apellido2 }}">
+                                </div>
+                            </form>
+
+                            <form>
+                                <div class="form-group">
+                                    <p>Sexo</p>
+                                    <div ngbDropdown class="d-inline-block">
+                                        <button class="btn btn-outline-info" id="dropdownBasic2" ngbDropdownToggle>{{sex}}</button>
+                                        <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                                            <button (click)="select2('Mujer')" ngbDropdownItem>Mujer</button>
+                                            <button (click)="select2('Hombre')" ngbDropdownItem>Hombre</button>
+                                            <button (click)="select2('Otro')" ngbDropdownItem>Otro</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <form>
+                                <div class="form-group">
+                                    <p>Mi visibilidad</p>
+                                    <div ngbDropdown class="d-inline-block">
+                                        <button class="btn btn-outline-info" id="dropdownBasic1" ngbDropdownToggle>{{visi}}</button>
+                                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                            <button (click)="select('Público')" ngbDropdownItem>Visible para todos</button>
+                                            <button (click)="select('Solo Club')" ngbDropdownItem>Solo para mis clubs</button>
+                                            <button (click)="select('Privado')" ngbDropdownItem>Solo para mí</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <form>
+                                <div class="form-group">
+                                    <label for="correo">Correo electrónico</label>
+                                    <input [(ngModel)]="profile.email" type="email" class="form-control" name="correo" placeholder="{{ details?.email }}">
+                                </div>
+                            </form>
+
+                            <div class="form-group">
+                                <label for="bio">Un poco más de mí...</label>
+                                <input [(ngModel)]="profile.bio" type="text" class="form-control" id="bio" name="bio" placeholder="Escriba aquí...">
+                                <br>
+                                <p>Fecha de nacimiento:</p>
+                            </div>
+
+
+                            <!-- DATEPICKER / FECHA DE NACIMIENTO -->
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="dd-MM-yyyy" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><img src="https://img.icons8.com/wired/24/000000/calendar.png"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+
+                            <hr class="bg-amarillo">
+
+                            <!-- SELECCIONAR IMAGEN -->
+                            <form>
+                                <div class="form-group">
+                                    <label for="imagenDePerfil">Imagen de perfil</label>
+                                    <p><small>Pon aquí la <strong>url (enlace)</strong> de tu imagen</small></p>
+                                    <input [(ngModel)]="profile.icono" type="url" class="form-control" name="iconourl" placeholder="URL de tu imagen de perfil">
+                                </div>
+                            </form>
+                            <hr class="bg-amarillo">
+                            <!-- NUEVA CONTRASEÑA -->
+                            <form>
+                                <div class="form-group row">
+                                    <div class="col-md-8">
+                                        <button type="button" class="btn btn-azulc text-dark text-white mt-2 ml-2 " (click)="openStackedModal(newPass)"><img src="https://img.icons8.com/wired/28/000000/key.png" alt="changePass" style="padding-right: 0.5vw;">Cambiar contraseña</button>
+                                        <!-- MODAL NUEVA CONTRASEÑA -->
+                                        <ng-template #newPass let-modal>
+                                            <div class="modal-header">
+                                                <h4 class="modal-title pull-left">Cambiar contraseña</h4>
+                                                <button type="button" class="close pull-right" aria-label="Close" (click)="modal.close()">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>¿Seguro que desea cambiar su contraseña?</p>
+                                                <div class="modal-delete-button mx-auto">
+                                                    <div class="row mx-auto">
+                                                        <div class="col-md-11">
+                                                            <input [(ngModel)]="profile.contrasena" type="password" class="form-control" name="contrasena" placeholder="Nueva contraseña">
+                                                            <label class="validation-message">La contraseña debe tener minimo 4 caracteres</label>
+                                                        </div>
+                                                    </div>
+                                                    <!-- BOTONES CANCELAR Y GUARDAR MODAL NUEVA CONTRASEÑA -->
+                                                    <button type="button" class="btn btn-rojoc text-dark text-white mt-2 ml-2 " (click)="modal.close()" (click)="closeModal2()">Cancelar</button>
+                                                    <button type="button" class="btn btn-verdec text-dark text-white mt-2 ml-2" (click)="updateProfile(details?.codUsuario, profile.nomUsuario, profile.apellido1, profile.apellido2, profile.visibilidad,
+                                                                                                                                         profile.email, profile.bio, profile.sexo, profile.alias, profile.contrasena, profile.icono, profile.fechaNac)" (click)="modalRef.hide()"
+                                                        (click)="modal.close()" (click)="closeModal2()" (click)="auth.logout()">Guardar</button>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </form>
+
+                        <!-- BOTONES CANCELAR Y GUARDAR DEL MODAL DE MODIFICAR -->
+                        <div class="modal-delete-button">
+                            <button type="button" class="btn btn-rojoc text-dark text-white mt-2 ml-2 " (click)="modalRef.hide()">Cancelar</button>
+                            <button type="button" class="btn btn-verdec text-dark text-white mt-2 ml-2" (click)="datePicker()" (click)="updateProfile(details?.codUsuario, profile.nomUsuario, profile.apellido1, profile.apellido2, 
+                                                                                                                 profile.visibilidad, profile.email, profile.bio, profile.sexo, profile.alias, profile.contrasena,
+                                                                                                                 profile.icono, profile.fechaNac)" onclick="location.reload()" (click)="modalRef.hide()">Guardar</button>
+                        </div>
+                    </div>
+
+                </ng-template>
+                <br><br>
+                <!-- MODAL PARA ELIMINAR -->
+                <button type="button" (click)="openModal(template)" class="btn btn-rojoc imgShadow btn-block text-dark"><img src="https://img.icons8.com/wired/32/000000/delete.png" alt="delete" style="padding-right: 0.5vw;">Eliminar
+                perfil</button>
+                <ng-template #template>
+                    <div class="modal-header">
+                        <h4 class="modal-title pull-left">Eliminar perfil</h4>
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Está seguro de que quiere eliminar su perfil?</p>
+                        <p><small>Asegúrate de que no seas el Administrador de ningún club de lectura o este podría
+              eliminarse.</small></p>
+                        <!-- BOTONES CANCELAR Y GUARDAR DEL MODAL DE ELIMINAR -->
+                        <div class="modal-delete-button">
+                            <button type="button" class="btn btn-verdec text-dark text-white mt-2 ml-2 " (click)="modalRef.hide()">No</button>
+                            <button type="button" class="btn btn-rojoc text-dark text-white mt-2 ml-2" (click)="modalRef.hide()" (click)="deleteProfile(details?.codUsuario)" (click)="auth.logout()">Sí</button>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+
+            <!-- DATOS DEL PERFIL -->
+            <div class="col-md-8 mt-3">
+                <h3 id="usu"><strong> {{ details?.nomUsuario }} {{details?.apellido1}} {{details?.apellido2}}</strong></h3>
+
+                <hr class="bg-light">
+
+                <p class="container">Alias: <strong>{{ details?.alias == '' ? details?.nomUsuario : details?.alias }}</strong>
+                    <!-- Si no tiene alias, se pone su nombre. -->
+                </p>
+                <p class="container">Correo electrónico: {{ details?.email }} </p>
+
+                <p class="container">Fecha de cumpleaños: {{ details?.fechaNac == '' ? "No definida" : details?.fechaNac | date:"longDate"}}
+                    <!-- Cuando se pueda poner la fecha de nacimiento, se pone: {{ details?.fecha_nac }}-->
+                </p>
+
+                <div id="descri" class="container border border-light bg-azulc5 rounded-des pt-3 mb-3">
+                    <h5><strong> Un poco más de mí...</strong></h5>
+                    <hr class="bg-info">
+                    <p>{{ details?.bio == '' ? "Aún no se ha proporcionado información." : details?.bio }}</p>
+                    <!-- Si no tiene biografía, se pone lo otro. -->
+                </div>
+
+                <div id="libfav" class="container border border-light rounded-des pt-3 mb-3 bg-azulc5">
+                    <h2><strong>Libros favoritos</strong></h2>
+                    <hr class="bg-info">
+                    <!-- AVERIGUAR COMO OPTIMIZAR -->
+                    <div *ngIf="arrLasFav?.length===0" id="card" class="card-group pb-3 ">
+                        <div class="card bg-azulc5 rounded-des">
+                            <img src="assets/fogg-sign-in.png" class="card-img-top" alt="Portada del libro">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>Aún no has añadido 3 libros favoritos.</strong></h5>
+                            </div>
+                        </div>
+                        <div class="card bg-azulc5 rounded-des">
+                            <img src="assets/fogg-sign-in.png" class="card-img-top" alt="Portada del libro">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>Aún no has añadido 3 libros favoritos.</strong></h5>
+                                <!-- {{ (arrLasFav[1].titulo.length > 30)? (arrLasFav[1].titulo | slice:0:30) + '...':(arrLasFav[1].titulo) }} -->
+                            </div>
+                        </div>
+                        <div class="card bg-azulc5 rounded-des">
+                            <img src="assets/fogg-sign-in.png" class="card-img-top" alt="Portada del libro">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>Aún no has añadido 3 libros favoritos.</strong></h5>
+                                <!-- {{ (arrLasFav[2].titulo.length > 30)? (arrLasFav[2].titulo | slice:0:30) + '...':(arrLasFav[2].titulo) }} -->
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div *ngIf="arrLasFav?.length===1" id="card" class="card-group pb-3 ">
+                        <div class="card bg-azulc5 rounded-des">
+                            <img src="{{ arrLasFav[0].portada }}" class="card-img-top" alt="Portada del libro">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>{{ (arrLasFav[0].titulo.length > 30)? (arrLasFav[0].titulo | slice:0:30) + '...':(arrLasFav[0].titulo) }}</strong></h5>
+                            </div>
+                        </div>
+                        <div class="card bg-azulc5 rounded-des">
+                            <img src="assets/fogg-sign-in.png" class="card-img-top" alt="Portada del libro">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>Aún no has añadido 3 libros favoritos.</strong></h5>
+                                <!-- {{ (arrLasFav[1].titulo.length > 30)? (arrLasFav[1].titulo | slice:0:30) + '...':(arrLasFav[1].titulo) }} -->
+                            </div>
+                        </div>
+                        <div class="card bg-azulc5 rounded-des">
+                            <img src="assets/fogg-sign-in.png" class="card-img-top" alt="Portada del libro">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>Aún no has añadido 3 libros favoritos.</strong></h5>
+                                <!-- {{ (arrLasFav[2].titulo.length > 30)? (arrLasFav[2].titulo | slice:0:30) + '...':(arrLasFav[2].titulo) }} -->
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div *ngIf="arrLasFav?.length===2" id="card" class="card-group pb-3 ">
+                        <div class="card bg-azulc5 rounded-des">
+                            <img src="{{ arrLasFav[0].portada }}" class="card-img-top" alt="Portada del libro">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>{{ (arrLasFav[0].titulo.length > 30)? (arrLasFav[0].titulo | slice:0:30) + '...':(arrLasFav[0].titulo) }}</strong></h5>
+                            </div>
+                        </div>
+                        <div class="card bg-azulc5 rounded-des">
+                            <img src="{{ arrLasFav[1].portada }}" class="card-img-top" alt="Portada del libro">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>{{ (arrLasFav[1].titulo.length > 30)? (arrLasFav[1].titulo | slice:0:30) + '...':(arrLasFav[1].titulo) }}</strong></h5>
+                                <!-- {{ (arrLasFav[1].titulo.length > 30)? (arrLasFav[1].titulo | slice:0:30) + '...':(arrLasFav[1].titulo) }} -->
+                            </div>
+                        </div>
+                        <div class="card bg-azulc5 rounded-des">
+                            <img src="assets/fogg-sign-in.png" class="card-img-top" alt="Portada del libro">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>Aún no has añadido 3 libros favoritos.</strong></h5>
+                                <!-- {{ (arrLasFav[2].titulo.length > 30)? (arrLasFav[2].titulo | slice:0:30) + '...':(arrLasFav[2].titulo) }} -->
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div *ngIf="arrLasFav?.length===3" id="card" class="card-group pb-3 ">
+                        <div class="card bg-azulc5 rounded-des">
+                            <img src="{{ arrLasFav[0].portada }}" class="card-img-top" alt="Portada del libro">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>{{ (arrLasFav[0].titulo.length > 30)? (arrLasFav[0].titulo | slice:0:30) + '...':(arrLasFav[0].titulo) }}</strong></h5>
+                            </div>
+                        </div>
+                        <div class="card bg-azulc5 rounded-des">
+                            <img src="{{ arrLasFav[1].portada }}" class="card-img-top" alt="Portada del libro">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>{{ (arrLasFav[1].titulo.length > 30)? (arrLasFav[1].titulo | slice:0:30) + '...':(arrLasFav[1].titulo) }}</strong></h5>
+                                <!-- {{ (arrLasFav[1].titulo.length > 30)? (arrLasFav[1].titulo | slice:0:30) + '...':(arrLasFav[1].titulo) }} -->
+                            </div>
+                        </div>
+                        <div class="card bg-azulc5 rounded-des">
+                            <img src="{{ arrLasFav[2].portada }}" class="card-img-top" alt="Portada del libro">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>{{ (arrLasFav[2].titulo.length > 30)? (arrLasFav[2].titulo | slice:0:30) + '...':(arrLasFav[2].titulo) }}</strong></h5>
+                                <!-- {{ (arrLasFav[2].titulo.length > 30)? (arrLasFav[2].titulo | slice:0:30) + '...':(arrLasFav[2].titulo) }} -->
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

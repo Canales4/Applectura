@@ -1,0 +1,209 @@
+<!-- Cuerpo del home -->
+<div class="container-fluid ">
+  <div class="row fondo">
+    <div class="col-lg-9 col-md-12">
+      <div class="row">
+        <div class="col-md-4 col-sm-6 icon">
+          <img [src]="iconUser" class="card-img-top img-fluid1" alt="Icono de Usuario" />
+        </div>
+        <div class="col-md-8 col-sm-6">
+          <h1 class="display-4" style="font-family: 'Amatic SC', cursive;font-weight: bold;">
+            Bienvenid@ {{ details?.nomUsuario }}
+          </h1>
+          <p>
+            Bienvenid@ a tu aplicación de lecturas,donde podrás disfrutar
+            añadiendo los libros que estas leyendo,puntuarlos y hacer una
+            crítica de lo que te ha parecido y además unirte a clubs y añadir
+            libros a tus próximas lecturas.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-12 colCarrousel">
+          <!--CARRUSEL-->
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active car1">
+                <!--PRIMER CARRUSEL-->
+                <h2 id="libroMasVendido">Libro añadido recientemente</h2>
+                <div class="row carruselCol">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-5 columna1">
+                        <img src="{{lastAddBook[0]?.portada}}"
+                          class="card-img-top img shadow-lg rounded-lg portadas" alt="Portada" />
+                      </div>
+                      <div class="col-md-7 columna2">
+                        <h3 id="titulo">{{ lastAddBook[0]?.titulo }}</h3>
+                        <h5 id="autor">
+                          {{ lastAddBook[0]?.codAutor }}
+                        </h5>
+                        <p id="sinopsis">
+                          {{
+                            lastAddBook[0]?.descripcion.length > 120
+                                                      ? (lastAddBook[0]?.descripcion
+                                                      | slice: 0:120) + "..."
+                                                      : lastAddBook[0]?.descripcion
+                                                  }}
+                        </p>
+                        <!-- <a href="#" class="myButton">Leer más...</a> -->
+                        <a class="nav-link" (click)="sendBook()" [routerLink]="['/home/book/details']" class="myButton">
+                          Descúbrelo aquí
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--termina carrusel 1-->
+              <div class="carousel-item car1">
+                <!--SEGUNDO CARRUSEL-->
+                <h2 id="libroMasVendido">Más puntuado</h2>
+                <div class="row carruselCol">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-7 columna2">
+                        <h3 id="titulo">
+                          {{ bestBookInfo[0]?.titulo }}
+                        </h3>
+                        <h5 id="autor">
+                          {{ bestBookInfo[0]?.codAutor }}
+                        </h5>
+                        <p id="sinopsis">
+                          {{
+                            bestBookInfo[0]?.descripcion.length > 120
+                                                      ? (bestBookInfo[0]?.descripcion
+                                                      | slice: 0:120) + "..."
+                                                      : bestBookInfo[0]?.descripcion
+                                                  }}
+                        </p>
+                        <ng-template #t let-fill="fill">
+                          <span class="star" [class.full]="fill === 100">
+                            <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                          </span>
+                        </ng-template>
+                        <ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
+                        <br />
+                        <!-- boton que activa la función de favoritos -->
+                        <button type="submit" class="myButton" (click)="favoritos()" onclick="location.reload()"
+                          *ngIf="!agregado">
+                          <span>
+                            Añadir a favoritos
+                          </span>
+                        </button>
+                        <button type="submit" class="myButton" (click)="deleteFavorito()" onclick="location.reload()"
+                          *ngIf="agregado">
+                          <span>Eliminar de favoritos</span>
+                        </button>
+                      </div>
+                      <div class="col-md-5 columna1">
+                        <img src="{{
+                          bestBookInfo[0]?.portada
+                                              }}" class="card-img-top img shadow-lg rounded-lg portadas" alt="Portada" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- Espacion para información adicional de la derecha -->
+    <div class="col-lg-3 col-md-12 espacioInformacion">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- ESTO ES LO DE BUSCAR UN USUARIO PARA PROBAR  -->
+          <div class="col-lg-12 col-md-12 search">
+            <!-- BUSCADOR USUARIO -->
+            <h6 for="termino">Buscar Usuario</h6>
+            <input type="text" placeholder="Busque usuario.." ng-change="buscoUser()" class="form-control" [(ngModel)]="termino"
+              (keyup)="buscoUser()" autofocus>
+
+            <table class="table table-hover list-group-item-warning table-borderless rounded-tab">
+              <div *ngFor="let users of searchUsers; let i = index" [attr.data-index]="i">
+                <td colspan="2" class="tdL2"><img class="icoSearch" src={{users.icono}}>{{users.nombre}}</td>
+              </div>
+            </table>
+          </div>
+
+          <!-- AQUI EMPIEZA EL ESPACIO DE INFORMACION DE LAS CARDS !! -->
+
+          <div class="col-lg-12 col-md-6">
+            <div *ngIf="clubMasNuevo" class="card">
+              <h5>{{ clubMasNuevo[0].NombreClub }}</h5>
+              <div class="container">
+                <img src="{{clubMasNuevo[0].icono}}" class="img-fluid" alt="..." />
+              </div>
+              <div class="card-body1">
+                <p>
+                  {{
+                    clubMasNuevo[0].DescripcionClub.length > 20
+                    ? (clubMasNuevo[0].DescripcionClub | slice: 0:20) + "..."
+                    : clubMasNuevo[0].DescripcionClub
+                  }}
+                </p>
+              </div>
+              <div class="container ">
+                <a class="nav-link" [routerLink]="['/home/club/info', clubMasNuevo[0].codClub]"
+                  class="btn btn-verdec btn-block">
+                  VISÍTALO
+                </a>
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="col-lg-12 col-md-6">
+            <div class="card">
+              <h5>Último Favorito</h5>
+              <div *ngIf="arrLasFav" class="container">
+                <img src="{{ arrLasFav[0]?.portada }}" class="img-card"
+                  alt="Portada del libro" />
+              </div>
+              <div *ngIf="!arrLasFav" class="container">
+                <img src="../../../../assets/no-image-icon-23485.png" class="img-card" alt="Pyuit" />
+              </div>
+              <div class="card-body1">
+                <h5>{{ arrLasFav[0]?.titulo }}</h5>
+                <div class="container ">
+                  <a class="nav-link" [routerLink]="['/home/list']" class="btn btn-verdec btn-block">
+                    FAVORITOS
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid Ranking">
+      <h1 class="display-4" style="font-family: 'Amatic SC', cursive;font-weight: bold;">
+        RANKING LIBROS MAS LEÍDOS
+      </h1>
+      <ul>
+        <div class="row justify-content-center">
+          <div *ngFor="let mostReads of arrMostRead; let i = index" [attr.data-index]="i">
+            <li id="listCards" class="contenedor">
+              <div class="card">
+                <h5>{{ i + 1 }}</h5>
+                <div class="container-fluid">
+                  <img src="{{ arrMostRead[i].portada }}" class="img imagen" alt="..." height="200vw"/>
+                </div>
+                <div class="card-text">
+                  <div class="container fluid">
+                    <img class="img-fluid" src="https://img.icons8.com/wired/20/000000/bookmark.png" />
+                    {{ arrMostRead[i].vecesLeido }}
+                  </div>
+                </div>
+              </div>
+            </li>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>
+<!--row fondo-->

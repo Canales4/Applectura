@@ -1,0 +1,29 @@
+<nav *ngIf="nav.visible">
+    <div class="container-fluid footer">
+        <div class="row">
+            <!-- Primera columna -->
+            <div class="col-md-4 columnas movil">
+                <p id="parrafo1">Rosa Mª Domínguez</p>
+                <p>Merche Perea</p>
+                <p>Laura del Pino</p>
+                <p>Lino Haller</p>
+            </div>
+            <div class="col-md-2 pantallaM"></div>
+            <!-- Segunda columna -->
+            <div class="col-md-4 col-sm-6 columnas">
+                <img class="img-fluid" src="../../../assets/icono-libros.jpg">
+            </div>
+            <!-- Tercera columna -->
+            <div class="col-md-4 col-sm-6 alinear">
+                <ul id="menu">
+                    <li><a class="nav-link" href="https://icons8.com">Iconos</a></li>
+                    <li><a class="nav-link" [routerLink]="['/home/search']" routerLinkActive="active">Proyecto</a></li>
+                    <li><a class="nav-link" [routerLink]="['/home']" routerLinkActive="active">Nosotros</a></li>
+                    <li><a class="nav-link" [routerLink]="['/home/list']" routerLinkActive="active">FP Dual</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+</nav>

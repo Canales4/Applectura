@@ -1,0 +1,72 @@
+.footer {
+  font-size: 0.9vw;
+}
+
+/* Menú para ajustar las navegaciones en vertical */
+
+#menu {
+  list-style: none;
+  margin-top: 2vw;
+  text-align: center;
+}
+#menu ul {
+  text-align: center;
+}
+
+.columnas {
+  border-right: solid black 1.5px;
+  margin-top: 1.2vw;
+  margin-bottom: 1vw;
+  text-align: center;
+  color: black;
+}
+
+#parrafo1 {
+  padding-top: 1vw;
+}
+
+.nav-link {
+  color: black;
+}
+
+/* Imagen central */
+
+.img-fluid {
+  max-width: 10vw;
+  height: auto;
+}
+.pantallaM {
+  display: none;
+}
+
+/* Adaptación para movil */
+
+@media (max-width: 600px) and (orientation: portrait) {
+  .movil {
+    display: none;
+  }
+  .img-fluid {
+    max-width: 20vw;
+    height: auto;
+  }
+  #menu li {
+    float: left;
+    text-align: center;
+    margin-left: 3vw;
+  }
+  .pantallasM {
+    display: none;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 800px) and (orientation: portrait) {
+  .movil {
+    display: none;
+  }
+}
+
+@media (min-width: 801px) {
+  .pantallaM {
+    display: none;
+  }
+}

@@ -1,0 +1,293 @@
+<div class="row justify-content-center m-0">
+  <div class="col-md-12 p-0">
+    <div class="container-fluid bg-azulc4 font-rale pb-5">
+      <div id="mr-4" class="container pt-4">
+        <div id="mr-4" class="row animated fadeIn fast">
+          <!-- ICONO Y BOTONES DE ELIMINAR Y MODIFICAR -->
+          <div class="col-md-4 mx-auto" style="text-align: center">
+            <div class="container-fluid">
+              <img src="{{clubs[0].icono}}" class="img-fluid clubIcon" 
+                alt="imagenBienvenida">
+            </div>
+            <div *ngIf="presidente" class="container-fluid mt-3">
+              <div class="row justify-content-center buttons">
+                <!-- LIBRO DEL MES -->
+                <div class="col-md-3 button">
+                  <button id="add" type="button" class="btn btn-secondary" (click)="getBooks()"
+                    (click)="openLg(monthBook)" placement="bottom" ngbTooltip="Añadir libro">
+                    <img src="https://img.icons8.com/wired/32/000000/bookmark.png" alt="add">
+                  </button>
+                </div>
+                <!--MODIFICAR CLUB -->
+                <div class="col-md-3 button">
+                  <button type="button" (click)="openModal(modify)" class="btn btn-verdec text-white" placement="bottom"
+                    ngbTooltip="Modificar">
+                    <img src="https://img.icons8.com/wired/32/000000/edit.png" alt="edit">
+                  </button>
+                </div>
+                <!--ELIMINAR CLUB -->
+                <div class="col-md-3 button">
+                  <button type="button" (click)="openModal(eliminate)" class="btn btn-rojoc text-white"
+                    placement="bottom" ngbTooltip="Eliminar">
+                    <img src="https://img.icons8.com/wired/32/000000/delete.png" alt="delete">
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="container-fluid mt-4">
+              <div class="row justify-content-center">
+                <div class="col-md-12">
+                  <h4><strong>Libro del mes</strong></h4>
+                  <hr class="bg-amarillo">
+                  <div *ngIf="tituloLibroMes !== ''"  class="container-fluid">
+                    <label class="mb-2" for="imgg">{{tituloLibroMes}}</label><br>
+                    <img [routerLink]="[ '/home/book/details' ]" routerLinkActive="active" (click)="bookMonthDetails()" style="cursor: pointer" class="img-fluid imgBook" id="imgg"
+                      src="{{portadaLibroMes}}"
+                      alt="bookImage">
+                  </div>
+                  <div *ngIf="tituloLibroMes === ''" class="container">
+                    <i><h6>Sin libro del mes</h6></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- DATOS DEL CLUB -->
+          <div class="col-md-8 mt-3">
+            <span *ngIf="presidente" style="float: right; margin-top: 12px" class="badge badge-primary">Administrador</span>
+            <button *ngIf="perteneceClub && !presidente" class="btn btn-danger leaveClub" [routerLink]="['/home/club']"
+              routerLinkActive="active" (click)="leaveClub()" style="float: right; margin-top: -9px" type="button"> <img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAABzQAAAc0BnvLTTgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAALOSURBVEiJvdZLiFdlGAbw59OZMZKZatREjYwpncao7EKiBRXd6IK50aKhld3oQhGh0dKI0KXlqnYNLcyiRWVKpRjV4DSRqwhaRJADlUEUEWj8WswnHA/zH/+z6d2c7/I873Pe857vOaeky8DCJCuTzE/ycynl92655SyJr0kymmR9kj+S/JLkVJILkwwm+T7J3lLKgW4Fm8kvxT6MYR3mdcANYycO4ca5CNyKCdxQ5xdjGw5iHMfwJhbiyopZiU/wRLcCn2ER+rEHX2AUK1rYJbXSa+u8t4o/N5vAEL7GYqzAV3i4y+o/xQbMx37c2Qn4HtbjXBzB9d0INKoar71cjEn0tUHr8E4d78aWbgUaOUZwGAXb8XQb8Dpuqg081Nq7ByMzJD0fW1tru7EJAzjSJkxgHl7AaGtvDb7F5Y218/A57m9hh7G3jj/A8iZhf2NjUYdHMYnV9S4PY2OHxzZRrztwR5L0JFmeZKpiBkspJ9rEUsp3eCjJWJJ/kuwspXw4k0iSv3BOkuM1d+Yl6U1ysgOhGVNVoD/JD7PgTjVy9p4WmUqyrAL+rkZ4RmAgyftJXkmyOclbWN1BZKCU8met4vjpBAVH63gH7msJ9NfDdndjbRWO4rIWdhk+ruO3saq5OVabuxb7WsStuHeG6obxamvtRTxeLWa8TdiIXXX8rmqOc4nqdxPow2a83AaUaiWX4KJqEUvnINCDA7gFC6rYBTMBN5h24D5ch6urj90+S/K1pj8Fg9hU1/ZoWX5pkR7L9FfwkVLKv/Vs9CUZT3JFki8z/SaeTDKU5KckD5ZStlf+M0muKqU8erbSn8VHzZNfe3YzbsNLWIptjf0+vIY30DurQIN0F77B881zU3vX05j3YEu1nCc75ev4I4EFSZ5K8kCSE0kmc+aPxHCSNUkOJtlVSvltziItwaEkI0mWZNrvfk3yYynlWDf8/yX+A4obz2eKFulzAAAAAElFTkSuQmCC">
+              Salir del club</button>
+            <button *ngIf="!perteneceClub && !presidente" class="btn btn-primary joinClub" [routerLink]="['/home/club']"
+              routerLinkActive="active" (click)="joinClub()" style="float: right; margin-top: -9px" type="button"> <img
+                width="25px"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAACTwAAAk8B95E4kAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAMuSURBVFiF7ZdbiFZVFMd/ey6ORtZo6jRfpIMO2sVe66WSzBq7QdCDb5EGvksk9NBDjGE+hIQP9Wj1JOME2gUvVI5UD0FFZamDgpec0SGyCyTiw6+Hsz4535nLOd/HwLy04OP891lr/dc6e+9v7bVhjiVVNVS7gWeA54AVQC9wG/A3MA6cBw4Cn6aU/pq1BNQ+YBAYAEaAz4BRYAz4E+gGasAa4ClgHXAIeD2ldL5qIlMF7lR3qWPqNnVeRb8u9RV1XN2pdrYSfJk6og6pi+Jdm7pe3aN+p15S/1AvqG+F/mG1LewXq8PqMXVpM8F71LPqoJri3Qb1B3VU3a4+HnaL4rdAvVX9Wj2e40rqjuBbViV4l/qNOhjjDnW3elHdpLZX4Fii3qm+UV829U31K7WrzHlPTFuK4B+rX1bKvpFnXvh+orbH8hxQ35nJ6R51Ql0c493qIbWjmeA5vg71sPp2jJeqv6urp3MYVl8NvFE9rd5eEuREib479s2GGL+mDk1luCR29IKY/u/V5yt8pRVsXlC/Dd5b1KvqHXV9WzyfBY6mlK4BjwHtwIEy8oryETAfeCSl9C/wOVlFbUjgabIyWk9mf0qp9OuqSPAMBy8RZ1ICq4CTgdcBR2YjeE6OBi/Ar8ADxQR6yQ4UyOr6hVlO4BxwV+CxHM5EvZ4rGteLBUM9ZXNysuA/X70WuEu9UUxgTO0NPF7HZVLlXxB2NfW3HL55XNeXYJxsGSCbouVViJuQPuBS4FoO30zgLHBv4BHgyVlO4IngBbgP+LlBq76k7gu8Xv3ROAlnkoqFKKk/qY/GeL/6YtFoziph3nCohbNgtEQ/1VmwbzrjfvWKk0/D0h5gGr52J5+GE+rKmZx22dgPvKfWQre2bF+E39rANfVdG/uBnWVZd5r1cIOF9yvVy7GGy4t1Qu1V7w795eJXmnVEX1iltzBrSIs9Yb86EPh9dUvgE/F8Wd0beEDtz83IDvWMTTamk7rinG6r0aLVN2HYby3YtdYV5wjm7l5QIOxTP4wdPKRuVh9Ue0Lfoz6kbgn9hPqBuqIKf6t3w/vJ7ocLgX/I7oW/0MLd8H/5D6f07AWiYRI/AAAAAElFTkSuQmCC">
+              Unirse al club</button>
+            <h3><strong>{{clubs[0]?.nomClub}}</strong></h3>
+            <hr class="hr-white">
+            <p class="container">Fecha de creación : {{clubs[0]?.FecCreClub | date: 'dd/MM/yyyy' }}
+            </p>
+            <div id="descri" class="container border border-info rounded-des pt-3 mb-3 ">
+              <h5><strong> Descripción</strong></h5>
+              <hr class="hr-blue"> {{clubs[0]?.desClub}}
+            </div>
+            <hr>
+            <div *ngIf="booksMonths[0]" class="container-fluid border border-info rounded-des pt-3">
+              <h3>Libros del mes - {{booksMonths[0].mes | slice:(booksMonths[0].mes.length - 4):(booksMonths[0].mes.length)}}</h3>
+              <hr class="hr-blue">
+              <div class="row pt-3 mt-4 mx-auto">
+                <div *ngFor="let book of booksMonths; index as i" class="col-md-2 mb-4 justify-content" style="text-align: center">
+                  <div class="card"> 
+                    <img *ngIf="book.portada" id="img2" class="card-img-top" height="140rem" src="{{book.portada}}" alt="" #img>
+                    <div *ngIf="!book.portada" style="text-align: center;">
+                      <img class="card-img-top" src="../../../../assets/no-image-icon-23485.png" alt="no image" #NoImg>
+                      <hr class="hr-white">
+                      <i>{{books.titulo}}</i>
+                    </div>
+                  </div>
+                  <label for="img2" class="mt-2" style="text-transform: capitalize; text-align: center">{{book.mes | slice:0:(book.mes.length - 5)}}</label>
+                </div>
+              </div>
+            </div>
+            <!-- SOCIOS CLUB -->
+            <div class="col-md-10 ">
+              <br>
+              <h3>Socios del Club</h3>
+              <table class="table table-striped table-success">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let socio of socios; let i = index" [attr.data-index]="i">
+                    <th *ngIf="socio.codUsuario !== clubs[0].presidente" scope="row"><div class="ml-2">{{i}}</div></th>
+                    <th *ngIf="socio.codUsuario === clubs[0].presidente" scope="row"><img src="https://img.icons8.com/dusk/28/000000/fairytale.png"></th>
+                    <td>{{socio.nombre}}</td>
+                    <td>
+                      <div *ngIf="presidente" class="container-fluid">
+                        <div class="row justify-content-center buttons">
+                          <button *ngIf="socio.codUsuario !== clubs[0].presidente" type="button" (click)="openModal(eliminateUser)" class="btn btn-rojoc text-white"
+                            ngbTooltip="Eliminar Socio">
+                            <img src="https://img.icons8.com/wired/24/000000/delete.png" alt="delete">
+                          </button>
+                          <!-- ELIMINAR SOCIO -->
+                          <ng-template #eliminateUser>
+                            <div class="modal-header">
+                              <h4 class="modal-title pull-left">Eliminar Socio</h4>
+                              <button type="button" class="close pull-right" aria-label="Close"
+                                (click)="modalRef.hide()">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <!-- MODAL PARA ELIMINAR UN SOCIO -->
+                            <div class="modal-body">
+                              <form>
+                                <h5>¿Está seguro de que quiere expulsar a <b>{{socio.nombre}}</b> ?</h5>
+                                <br>
+                              </form>
+                              <div class="modal-delete-button">
+                                <button class="btn btn-success btn-block" (click)="deleteSocio(socios[i].codSocio)"
+                                  (click)="modalRef.hide()">Expulsar socio</button>
+                                <br>
+                                <button type="button" class="btn btn-danger btn-block"
+                                  (click)="modalRef.hide()">Cancelar</button>
+                              </div>
+                            </div>
+                          </ng-template>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <button *ngIf="socio.codUsuario !== clubs[0].presidente" type="button" class="btn btn-verdec text-white" ngbTooltip="Ver perfil">
+                        <img src="https://img.icons8.com/wired/24/000000/user.png" alt="ver perfil">
+                      </button>
+                      <button *ngIf="socio.codUsuario === clubs[0].presidente && !presidente" type="button" class="btn btn-verdec text-white" ngbTooltip="Ver perfil">
+                        <img src="https://img.icons8.com/wired/24/000000/user.png" alt="ver perfil">
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div *ngIf="socios?.length==0" style="text-align: center">
+                <h2> Este club aún no tiene socios</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modificarCLUB -->
+<div class="row">
+  <ng-template #modify>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Modificar un club</h4>
+      <hr>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <h5>Su club se actualizará con los siguientes datos</h5>
+      <br>
+      <form #signInForm="ngForm"
+        (ngSubmit)="signInForm.valid && updateClub(clubs[0].codClub, clubs[0].nomClub, clubs[0].desClub, clubs[0].icono)">
+        <div class="form-group">
+          <input type="text" class="form-control" name="nombre" #nombre="ngModel" [(ngModel)]="clubs[0].nomClub"
+            placeholder="{{ clubs[0].nomClub }}" required minlength="4" maxlength="20"
+            [ngClass]="{'invalid-textbox' : !nombre.valid }">
+          <div *ngIf="!nombre.valid">
+            <label class="validation-message AlerR">Los carácteres deben entre 2-20</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="nombre">Descripción</label>
+          <textarea #descripcion="ngModel" [(ngModel)]="clubs[0].desClub" class="form-control" name="descripcion"
+            placeholder="{{ clubs[0].desClub }}" rows="2" required minlength="4" maxlength="200"
+            [ngClass]="{'invalid-textbox' : !descripcion.valid }">
+          </textarea>
+          <div *ngIf="!descripcion.valid">
+            <label class="validation-message AlerR "> Los carácteres deben ser entre
+              4-200</label>
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="icono">Icono</label>
+            <textarea #icono="ngModel" [(ngModel)]="clubs[0].icono" class="form-control" name="icono"
+              placeholder="{{ clubs[0].icono }}" rows="2" required>
+            </textarea>
+            <div *ngIf="!descripcion.valid">
+              <label class="validation-message AlerR "> Los carácteres deben ser entre
+                4-200</label>
+            </div>
+          </div>
+        <!-- BOTONES -->
+        <div class="modal-button btn-group">
+          <!-- Control de botones de guardar -->
+          <div *ngIf="descripcion.valid || nombre.valid">
+            <button type="submit" class="btn btn-success text-dark text-white mt-2 ml-2" (click)="modalRef.hide()">
+              Modificar
+              Club </button></div>
+          <button type="button" class="btn btn-rojoc text-dark text-white mt-2 ml-2"
+            (click)="modalRef.hide()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+</div>
+<!-- MODIFICAR CLUB FIN -->
+
+<!--Eliminar club-->
+<ng-template #eliminate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Eliminar un club</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <!-- MODAL PARA ELIMINAR UN CLUB -->
+  <div class="modal-body">
+    <form>
+      <h5>¿Está seguro de que quiere eliminar su club?</h5>
+      <p>Si acepta su club sera eliminado y todo lo relacionado con el desaparecera.</p>
+      <br>
+    </form>
+    <div class="modal-delete-button">
+      <button type="button" class="btn btn-danger btn-block" (click)="modalRef.hide()">Cancelar</button>
+      <br>
+      <a href="http://localhost:4200/home/club" style=text-decoration:none;><button class="btn btn-success btn-block"
+          (click)="deleteClub(clubs[0].codClub)" (click)="modalRef.hide()"> Eliminar Club</button> </a>
+    </div>
+  </div>
+</ng-template>
+<!-- ELIMINAR SOCIO -->
+<ng-template #eliminateUser>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Eliminar Socio</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <!-- MODAL PARA ELIMINAR UN SOCIO -->
+  <div class="modal-body">
+    <form>
+      <h5>¿Está seguro de que quiere expulsar a este socio?</h5>
+      <br>
+    </form>
+    <div class="modal-delete-button">
+      <button class="btn btn-success btn-block" (click)="deleteSocio(socios[1].codSocio)"
+        (click)="modalRef.hide()">Expulsar socio</button>
+      <br>
+      <button type="button" class="btn btn-danger btn-block" (click)="modalRef.hide()">Cancelar</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #monthBook let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Elegir libro del mes</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row pt-3 mt-4 mx-auto">
+      <div *ngFor="let book of books; index as i" class="col-md-2 mb-4 justify-content">
+        <div class="card" (click)="modal.close()" (click)="bookMonth(book.codLibro)"> 
+          <img *ngIf="book.portada" id="img" class="card-img-top" src="{{book.portada}}" alt="" #img>
+          <div *ngIf="!book.portada" style="text-align: center;">
+            <img class="card-img-top" src="../../../../assets/no-image-icon-23485.png" alt="no image" #NoImg>
+            <hr class="hr-white">
+            <i>{{books.titulo}}</i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

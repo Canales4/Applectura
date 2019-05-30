@@ -1,0 +1,185 @@
+<div class="container-fluid bg-red font-rale ">
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <h1 class="display-4 text-center Head1">Mis Clubs</h1>
+    </div>
+    <div class="col-md-2 offset-md-2 mt-4">
+      <button type="button" (click)="openModal(modify)" class="btn btn-info text-white ">CREAR UN CLUB</button>
+    </div>
+  </div>
+  <hr class="hr-white">
+  <!-- comprobamos si pertenece a algun club y si es asi muestralo -->
+  <div *ngIf="clubsLU?.length>0" class="row mx-auto justify-content-center">
+    <div class="col-md-2" *ngFor="let clubU of clubsLU ">
+      <!--con *ngFor="let club of clubs" decimos que vaya recorriendo los club y creando una variable por cada uno-->
+      <div class="card text-center">
+        <div *ngIf="clubU.presidente==details.codUsuario" class="card-header"> <img style="float: left"
+            src="https://img.icons8.com/color/24/000000/crown.png">
+          {{clubU.nomClub }}
+        </div>
+        <div *ngIf="clubU.presidente!=details.codUsuario" class="card-header"><img style="float: left"
+            src="https://img.icons8.com/dusk/24/000000/handshake.png">
+          {{clubU.nomClub }}
+        </div>
+        <!-- para ver el club concreto -->
+        <a class="nav-link" [routerLink]="['/home/club/info', clubU.codClub]" class="btn btn-verde2 btn-block">
+          VER CLUB
+        </a>
+      </div>
+      <br>
+    </div>
+  </div>
+  <!-- comprobamos si no pertenece a ningun club -->
+  <div *ngIf="clubsLU?.length==0" style="text-align: center">
+    <h2> No pertenece a ningun club</h2>
+  </div>
+  <hr class="hr-white">
+  <!-- MODAL PARA CREAR UN CLUB -->
+  <div class="row">
+    <ng-template #modify>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">CREAR UN CLUB</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #signInForm="ngForm" (ngSubmit)="signInForm.valid && saveNewClub() ">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" name="nombre" #nombre="ngModel" [(ngModel)]="club.nomClub"
+              placeholder="Introduce Nombre" required minlength="4" maxlength="20"
+              [ngClass]="{'invalid-textbox' :signInForm.submitted && !nombre.valid }">
+            <div *ngIf="signInForm.submitted && !nombre.valid">
+              <label class="validation-message AlerR">El nombre es requerido y sus caracteres son entre 2-20</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="nombre">Descripción</label>
+            <textarea #descripcion="ngModel" [(ngModel)]="club.desClub" class="form-control" name="descripcion"
+              placeholder="Introduce Descripcion" rows="2" required minlength="4" maxlength="200"
+              [ngClass]="{'invalid-textbox' :signInForm.submitted && !descripcion.valid }">
+            </textarea>
+            <div *ngIf="signInForm.submitted && !descripcion.valid">
+              <label class="validation-message AlerR ">La descripción es requerida y sus caracteres son entre
+                4-200</label>
+            </div>
+          </div>
+          <!-- Para elegir privacidad -->
+          <form #Privacidad="ngForm">
+            <div class="form-group">
+              <p>Privacidad</p>
+              <div ngbDropdown class="d-inline-block">
+                <button class="btn btn-outline-info" id="dropdownBasic1" ngbDropdownToggle>{{priv}}</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <button (click)="select('público')" ngbDropdownItem>Público</button>
+                  <button (click)="select('privado')" ngbDropdownItem>Privado</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <!-- -------- -->
+          <!-- Para elegir genero -->
+          <form #Genero="ngForm">
+            <div class="form-group">
+              <p>Genero</p>
+              <div ngbDropdown class="d-inline-block">
+                <button class="btn btn-outline-info" id="dropdownBasic1" ngbDropdownToggle>{{genero}}</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style=" height: 9vw;
+                      overflow: auto;">
+                  <button (click)="select2('Acción y Aventuras')" ngbDropdownItem>Acción y Aventuras</button>
+                  <button (click)="select2('Adulto')" ngbDropdownItem>Adulto</button>
+                  <button (click)="select2('Bibliografías y Memorias')" ngbDropdownItem>Bibliografías y
+                    Memorias</button>
+                  <button (click)="select2('Ciencia Ficción')" ngbDropdownItem>Ciencia Ficción</button>
+                  <button (click)="select2('Cómics')" ngbDropdownItem>Cómics</button>
+                  <button (click)="select2('Cómica')" ngbDropdownItem>Cómica</button>
+                  <button (click)="select2('Dramática')" ngbDropdownItem>Dramática</button>
+                  <button (click)="select2('Erótica')" ngbDropdownItem>Erótica</button>
+                  <button (click)="select2('Fantasía')" ngbDropdownItem>Fantasía</button>
+                  <button (click)="select2('Histórica')" ngbDropdownItem>Histórica</button>
+                  <button (click)="select2('Infantiles')" ngbDropdownItem>Infantiles</button>
+                  <button (click)="select2('Juveniles')" ngbDropdownItem>Juveniles</button>
+                  <button (click)="select2('Manga y Novela Gráfica')" ngbDropdownItem>Manga y Novela Gráfica</button>
+                  <button (click)="select2('Poesía')" ngbDropdownItem>Poesía</button>
+                  <button (click)="select2('Romántica')" ngbDropdownItem>Romántica</button>
+                  <button (click)="select2('Teatro')" ngbDropdownItem>Teatro</button>
+                  <button (click)="select2('Terror')" ngbDropdownItem>Terror</button>
+                  <button (click)="select2('Variado')" ngbDropdownItem>Variado</button>
+                  <button (click)="select2('Otros')" ngbDropdownItem>Otros</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <!-- -------- -->
+          <!-- BOTONES -->
+          <div class="modal-button btn-group">
+            <!-- Control de botones de guardar -->
+            <div *ngIf="descripcion.valid && nombre.valid">
+              <button type="submit" class="btn btn-success text-dark text-white mt-2 ml-2" (click)="modalRef.hide()">
+                Crear
+                Club </button></div>
+            <div *ngIf="!descripcion.valid || !nombre.valid">
+              <button type="submit" class="btn btn-success text-dark text-white mt-2 ml-2"> Crear
+                Club </button></div>
+            <!-- Boton de ocultar -->
+            <button type="button" class="btn btn-rojoc text-dark text-white mt-2 ml-2"
+              (click)="modalRef.hide()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+    <!-- ----------------- -->
+    <!-- CLUBS MAS POPULARES -->
+    <div class="col-md-1 "></div>
+    <div class="col-md-4 ">
+      <h3>Clubs más populares</h3>
+      <br>
+      <table class="table table-striped table-success">
+        <thead>
+          <tr>
+            <th scope="col" class="cLS">#</th>
+            <th scope="col">Nombre</th>
+            <th class="text-center" scope="col">Nº Socios</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let clubS of clubsSoci; let i = index" [attr.data-index]="i">
+            <th scope="row">{{i+1}}</th>
+            <td>{{clubS.nombre}}</td>
+            <td class="text-center">{{clubS.cuenta}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- BUSCADOR CLUB -->
+    <div class="col-md-4 offset-md-2">
+      <h3 for="termino">Buscar club</h3>
+      <br>
+      <input type="text" placeholder="Busque club.." class="form-control" [(ngModel)]="termino" (keyup)="buscarClubs()"
+        autofocus>
+      <div class="row" *ngIf="clubs.length == 0">
+        <div class="alert aler-info" role="alter">
+          No ha buscado ningun club o no existe con ese nombre
+        </div>
+      </div>
+      <table class="table table-hover list-group-item-warning table-borderless rounded-tab">
+        <div *ngFor="let club of clubs; let i = index" [attr.data-index]="i">
+          <tbody>
+            <tr>
+              <td *ngIf="club.nomClub.length < 16">{{club.nomClub}}</td>
+              <td *ngIf="club.nomClub.length >=16" placement="top" class="pr-3" ngbTooltip="{{club.nomClub}}">
+                {{ (club.nomClub.length > 16) ? (club.nomClub | slice:0:12) + '...':(club.nomClub) }}</td>
+              <td class="tdL2">{{club.generoClub}}</td>
+              <td class="tdL2">{{club.privaClub}}</td>
+              <td class="tdL3"><a class="nav-link" [routerLink]="['/home/club/info', club.codClub]"
+                  class="btn btn-verde2 btn-block">
+                  VER CLUB
+                </a></td>
+            </tr>
+          </tbody>
+        </div>
+      </table>
+    </div>
+  </div>
+</div>

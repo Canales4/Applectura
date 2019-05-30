@@ -1,0 +1,60 @@
+pipeline {
+    agent any
+    tools {
+        nodejs 'node-11.10.0'
+    }
+    stages {
+        stage('Cleanup') {
+          steps{
+            cleanWs()
+          }
+        }
+        stage('SCM Checkout') {
+            steps {
+                git branch: 'development', credentialsId: 'jenk', url: 'git@github.com:LinoHallerRios/AppLecturas.git'
+            }
+        }
+        stage('Install'){
+          steps {
+            sh 'cd client && npm install'
+          }
+        }
+        stage('Build'){
+          steps {
+            sh 'cd client && npm run build'
+          }
+        }
+        stage('Dump .sql'){
+          steps {
+              sh 'cd /c/xampp/mysql/bin && ./mysqldump --user=root --host=172.21.57.79 --protocol=tcp --port=3306 --default-character-set=utf8 "app_lecturas" > "/c/devops/backup-sql/app_lecturas.sql"'
+          }
+        }
+        stage('Deploy Bluemix'){
+          steps {
+            withCredentials([string(credentialsId: 'ApiKey', variable: 'varApiKey')]) {
+              sh 'ibmcloud login --apikey $varApiKey && ibmcloud target --cf && cd client && ibmcloud cf push applectura'
+            }
+          }
+        }
+        stage('Sonar Gate') {
+          steps{
+            script {
+              withSonarQubeEnv('sonar-6') {
+                sh 'cd ../.. && cd tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar33/bin && ./sonar-scanner'
+              }
+              def qg = waitForQualityGate()
+              if (qg.status != 'OK') {
+                error "Pipeline abortado por no pasar quality gates: ${qg.status}"
+              }
+            }
+          }
+        }
+        stage('IBMCloud Deploy') {
+          steps {
+            script {
+              sh 'echo En proceso... '
+            }
+          }
+        }
+    }
+}

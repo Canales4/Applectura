@@ -1,0 +1,162 @@
+/* ESTILO PARA LA TABLA BUSQUEDA */
+table{
+    table-layout: fixed; 
+    width:100%;
+ } 
+ .table-borderless td,
+ .table-borderless th {
+     border: 0;
+ }
+ .tdL1{width:5%; }
+ .tdL2{width:25%; }
+ .tdL3{width:20%; }
+
+ .cL1{width: 15%;}
+
+ .rounded-tab {
+    padding: 1vw;
+    border-radius: 1.5vw;
+}
+ /* --- */
+
+/* Colors */
+
+.bg-grisc {
+    background-color: rgb(238, 238, 238);
+}
+
+.bg-gris {
+    background: rgb(127, 127, 127);
+}
+
+.bg-amarillo {
+    background-color: rgb(255, 204, 128);
+}
+
+
+.bg-azulc {
+    background-color: rgb(197, 227, 252);
+}
+
+.bg-azulc2 {
+    background-color: rgb(204, 241, 255);
+}
+
+.bg-azulc3 {
+    background-color: rgb(239, 248, 252);
+}
+
+.bg-azulc4 {
+    background-color: rgb(132, 178, 255);
+}
+
+.bg-amarillon {
+    background: rgb(255, 189, 43);
+}
+
+.bg-icon {
+    background: rgb(242, 231, 208);
+}
+
+.hr-blue{ 
+    display: block; 
+    height: 1px;
+    border: 0; 
+    border-top: 1px solid #17a2b8!important;
+    margin: 1em 0; 
+    padding: 0; 
+  }  
+
+
+/* BOTONES */
+
+.btn-rojoc {
+    background: rgb(255, 124, 124);
+}
+
+.btn-rojoc:hover {
+    background: rgb(219, 100, 100);
+}
+
+.btn-verdec {
+    background: rgb(127, 216, 114);
+}
+
+.btn-verde2 {
+    background: rgb(188, 207, 205)
+}
+
+.btn-verdec:hover {
+    background: rgb(111, 188, 100);
+}
+
+
+/* FUENTES */
+
+.font-rale {
+    font-family: 'Raleway', sans-serif;
+}
+
+.font-amatic {
+    font-family: 'Amatic SC', cursive;
+}
+
+.hr-white{ 
+    display: block; 
+    height: 1px;
+    border: 0; 
+    border-top: 1px solid white;
+    margin: 1em 0; 
+    padding: 0; 
+  }
+
+/* Styles */
+
+.rounded-icon {
+    padding: 1vw;
+    border-radius: 4vw;
+}
+
+.rounded-des {
+    padding: 1vw;
+    border-radius: 1.5vw;
+}
+
+.img-fluid {
+    padding: 0;
+}
+
+.clubIcon {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.35);
+}
+
+#img {
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+#img:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+#img2 {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.imgBook {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.imgBook:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.btn {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+@media all and (max-width: 600px) {
+    
+    
+}

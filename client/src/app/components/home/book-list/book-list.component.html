@@ -1,0 +1,63 @@
+<div class="container-fluid m-0 back">
+  <div class="row mt-4 mx-auto justify-content-center">
+    <div class="col-md-11" style="text-align: center;">
+      <h1 class="display-4" style="font-family: 'Amatic SC', cursive;">Mis Libros</h1>
+      <hr class="hr-yellow">
+    </div>
+  </div>
+  
+  <div class="row pt-3 mt-4 mx-auto">
+    <div *ngFor="let books of books; index as i" class="col-md-2 mb-4 justify-content">
+        <div class="card" (click)="sendBook(books)" [routerLink]="[ '/home/book/details' ]" routerLinkActive="active">
+          <img *ngIf="books.portada" class="card-img-top" src="{{books.portada}}" alt="" #img height="250vw">
+          <div *ngIf="!books.portada" style="height: 250px; text-align: center;">
+            <img class="card-img-top" src="../../../../assets/no-image-icon-23485.png" alt="no image" #NoImg>
+            <hr>
+            <i>Sin imagen</i>
+          </div>
+          <div class="overlay">
+            <h5 class="m-2">{{ (books.titulo.length > 42)? (books.titulo | slice:0:42) + '...':(books.titulo) }}</h5>
+            <hr style="color: white; background-color: white; border: none; height: 0.7px; width: 87%">
+            <p><i>{{books.nomAutor}}</i></p>
+            <p>{{books.genero}}</p>
+            <p *ngIf="books.paginas">{{books.paginas}} Páginas</p>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Empiezo a tocar lista de favoritos(Rosa) -->
+  <div class="row mt-4 mx-auto justify-content-center">
+      <div class="col-md-11" style="text-align: center;">
+        <h1 class="display-4" style="font-family: 'Amatic SC', cursive;">Mis Favoritos</h1>
+        <hr class="hr-yellow">
+      </div>
+    </div>
+    
+    <div class="row pt-3 mt-4 mx-auto">
+
+    </div>
+</div>
+
+<script>
+
+  var sizeTheOverlays = function () {
+    $(".overlay").resize().each(function () {
+      var h = $(this).parent().outerHeight();
+      var w = $(this).parent().outerWidth();
+      $(this).css("height", h);
+      $(this).css("width", w);
+    });
+  };
+
+  sizeTheOverlays();
+
+  var width = $(window).width();
+  $(window).resize(function () {
+    if ($(this).width() != width) {
+      width = $(this).width();
+      sizeTheOverlays();
+    }
+  });
+
+</script>

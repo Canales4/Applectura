@@ -1,0 +1,134 @@
+/* Colors */
+
+.bg-grisc {
+    background-color: rgb(238, 238, 238);
+}
+
+.bg-gris {
+    background: rgb(127, 127, 127);
+}
+
+.bg-amarillo {
+    background-color: rgb(255, 204, 128);
+}
+
+.bg-azulc {
+    background-color: rgb(197, 227, 252);
+}
+
+.bg-azulc2 {
+    background-color: rgb(204, 241, 255);
+}
+
+.bg-azulc3 {
+    background-color: rgb(109, 148, 214);
+}
+
+.bg-azulc4 {
+    background-color: rgb(132, 178, 255);
+}
+
+.bg-azulc5 {
+    background-color: rgb(198, 219, 255);
+}
+
+.bg-amarillon {
+    background: rgb(255, 189, 43);
+}
+
+.bg-icon {
+    background: rgb(242, 231, 208);
+}
+
+
+/* BOTONES */
+
+.btn-rojoc {
+    background: rgb(255, 124, 124);
+}
+
+.btn-rojoc:hover {
+    background: rgb(219, 100, 100);
+}
+
+.btn-verdec {
+    background: rgb(127, 216, 114);
+}
+
+.btn-verdec:hover {
+    background: rgb(111, 188, 100);
+}
+
+.btn-azulc {
+    background-color: rgb(132, 178, 255);
+}
+
+.btn-azulc:hover {
+    background-color: rgb(198, 219, 255);
+}
+
+
+/* FUENTES */
+
+.font-rale {
+    font-family: 'Raleway', sans-serif;
+}
+
+.font-amatic {
+    font-family: 'Amatic SC', cursive;
+}
+
+
+/* Styles */
+
+.rounded-icon {
+    padding: 1vw;
+    border-radius: 4vw;
+}
+
+.rounded-des {
+    padding: 1vw;
+    border-radius: 1.5vw;
+}
+
+.img-fluid {
+    padding: 0;
+}
+
+#mr-4 {
+    width: 100%;
+    height: auto;
+}
+
+.imgShadow {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.35);
+}
+
+
+/* #libfav {
+    width: 50%;
+    margin-left: 0;
+} */
+
+
+/* RESPONSIVE */
+
+@media all and (max-width: 600px) {
+    .container {
+        width: 100%;
+        height: auto;
+        margin: 2vw;
+    }
+    #libfav {
+        border: none !important;
+    }
+    #descri {
+        border: none !important;
+    }
+    #usu {
+        display: none;
+    }
+    #mr-4 {
+        margin: 0;
+    }
+}

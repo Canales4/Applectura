@@ -1,0 +1,54 @@
+.card {
+    font-family: 'Raleway', sans-serif;
+}
+
+.card h3 {
+    font-family: 'Amatic SC', cursive;
+}
+
+.card-header {
+    font-family: 'Amatic SC', cursive;
+    background-color: white;
+}
+
+#col1 {
+    margin-left: 25vh;
+}
+
+
+.image {
+    margin-left: 40vh;
+}
+
+.hr-yellow {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid rgb(255, 204, 128);
+    margin: 1em 0;
+    padding: 0;
+}
+
+.line {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+
+@media (max-width: 600px) {
+    .image {
+        margin-left: 4vh;
+    }
+
+    #col1 {
+        margin-left: 0;
+    }
+
+    #bsq1 {
+        margin: 0;
+        padding: 0;
+    }
+}

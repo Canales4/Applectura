@@ -1,0 +1,235 @@
+<div class="container-fluid m-0 p-0">
+  <div class="row mx-auto pt-5 justify-content-center">
+    <div class="col-md-3 mr-5" style="text-align: center;">
+      <div class="py-4 mt-2 imgPrev">
+        <a href="{{book[0].portada}}" target="_blank"><img class="img-fluid imgShadow" width="50%"
+            src="{{book[0].portada}}" alt="book"></a>
+      </div>
+      <p *ngIf="currentBookStatus == 'Leyendo'" class="px-3">
+        <button class="mt-4 btn btn-lg btn-block btn-secondary bookStts" disabled>Leyendo</button>
+      </p>
+      <p class="mt-4" *ngIf="currentBookStatus == 'Leyendo'">
+        <ngb-progressbar type="warning" [striped]="true" [animated]="true" [value]="bookProgress">Copying file
+          <b>{{pag}} de
+            {{bookPag}}</b>...
+        </ngb-progressbar>
+      </p>
+      <p *ngIf="currentBookStatus == 'Leido'" class="px-3">
+        <button class="mt-4 btn btn-lg btn-block btn-primary bookStts" disabled><img class="mr-1"
+            style="cursor: default" width="32px"
+            src="data:image/png;base64,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">
+          Leido</button>
+      </p>
+      <p *ngIf="currentBookStatus == 'Próxima lectura'" class="px-3">
+        <button class="mt-4 btn btn-lg btn-block btn-warning bookStts" disabled><img class="mr-1"
+            style="cursor: default" width="32px" src="https://img.icons8.com/wired/64/000000/calendar.png"> Próxima
+          lectura</button>
+      </p>
+      <div class="mt-4">
+        <img width="44px" class="mr-4" (click)="openModal(saveConfirm)" (mouseover)="hoverFav()"
+          (mouseleave)="hoverFavLeav()" [src]="favPath">
+        <img width="44px" class="mr-4" (click)="openModal(content)" (mouseover)="hoverBook()"
+          (mouseleave)="hoverBookLeav()" [src]="bookPath">
+        <img width="44px" class="mr-4" (mouseover)="hoverComm()" (mouseleave)="hoverCommLeav()" [src]="commPath">
+      </div>
+    </div>
+    <div class="col-md-6 details">
+      <h1 class="display-4">{{book[0].titulo}}</h1>
+      <hr class="hr-yellow">
+      <div class="container-fluid detailBox p-4">
+        <b>
+          <h3>Descripción</h3>
+        </b>
+        <hr class="hr-blue">
+        <div *ngIf="book[0].descripcion.length >= 360" id="acc">
+          <p class="collapse" id="collapseAcc">
+            {{book[0].descripcion}}
+          </p>
+          <a class="collapsed" data-toggle="collapse" href="#collapseAcc" aria-expanded="false"
+            aria-controls="collapseAcc"></a>
+        </div>
+        <div *ngIf="book[0].descripcion.length < 360">
+          {{book[0].descripcion}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row pt-5 mx-auto justify-content-center">
+    <div class="col-md-11">
+      <div class="hr-sect">Información</div>
+      <div class="row mt-5 mx-auto">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+          <div class="container-fluid detailBox p-4">
+            <h4>Ficha técnica</h4>
+            <hr class="hr-blue">
+            <div class="dataSheet">
+              <div class="row mx-auto">
+                <div class="col-md" style="width: 50%">
+                  <p>
+                    <b>ISBN:</b><br>
+                    <b>Editorial:</b><br>
+                    <b>Nº de páginas:</b><br>
+                    <b>Idioma:</b><br>
+                    <b>Año de publicación:</b><br>
+                  </p>
+                </div>
+                <div class="col-md" style="width: 50%">
+                  <p>
+                    {{book[0].ISBN}}<br>
+                    {{book[0].editorial ? book[0].editorial : 'Sin editorial'}}<br>
+                    {{book[0].paginas}}<br>
+                    {{book[0].idioma | uppercase }}<br>
+                    {{book[0].anoPublicacion}}<br>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="container-fluid bestComment p-4">
+            <h4>Puntuación</h4>
+            <hr class="hr-blue">
+            <div class="well well-sm">
+              <div class="row mt-4">
+                <div class="col-xs-12 col-md-6 text-center">
+                  <h1 class="rating-num">
+                    4.0</h1>
+                  <div class="rating">
+                    <i class="fas fa-star" style="color: #ffcc00"></i><i style="color: #ffcc00" class="fas fa-star"></i>
+                    <i style="color: #ffcc00" class="fas fa-star"></i><i style="color: #ffcc00" class="fas fa-star"></i>
+                    <i style="color: #ffcc00" class="far fa-star"></i>
+                  </div>
+                  <div>
+                    <i class="fas fa-user"></i> 1,050,008 total
+                  </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                  <div class="row rating-desc">
+                    <div class="col-xs-3 col-md-3 text-right">
+                      <i class="fas fa-star"></i>5
+                    </div>
+                    <div class="col-xs-8 col-md-9">
+                      <div class="progress progress-striped">
+                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                          aria-valuemax="100" style="width: 80%">
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end 5 -->
+                    <div class="col-xs-3 col-md-3 text-right">
+                      <i class="fas fa-star"></i>4
+                    </div>
+                    <div class="col-xs-8 col-md-9">
+                      <div class="progress">
+                        <div class="progress-bar bg-info" role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                          aria-valuemax="100" style="width: 60%">
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end 4 -->
+                    <div class="col-xs-3 col-md-3 text-right">
+                      <i class="fas fa-star"></i>3
+                    </div>
+                    <div class="col-xs-8 col-md-9">
+                      <div class="progress">
+                        <div class="progress-bar bg-secondary" role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                          aria-valuemax="100" style="width: 40%">
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end 3 -->
+                    <div class="col-xs-3 col-md-3 text-right">
+                      <i class="fas fa-star"></i>2
+                    </div>
+                    <div class="col-xs-8 col-md-9">
+                      <div class="progress">
+                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                          aria-valuemax="100" style="width: 20%">
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end 2 -->
+                    <div class="col-xs-3 col-md-3 text-right">
+                      <i class="fas fa-star"></i>1
+                    </div>
+                    <div class="col-xs-8 col-md-9">
+                      <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                          aria-valuemax="100" style="width: 15%">
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end 1 -->
+                  </div>
+                  <!-- end row -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-11 mt-5">
+      <div class="hr-sect">Opinión sobre {{book[0].titulo}}</div>
+    </div>
+    <div class="col-md-11">
+      <div class="row pt-5 mx-auto justify-content-center">
+        <div class="col-md-11">
+          <div class="container-fluid">
+            <div class="container-fluid detailBox p-4">
+              <b>
+                <h3>Comentarios y criticas</h3>
+              </b>
+              <hr class="hr-blue">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Información de lectura</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label id="example-radio-group-label">Elige el estado del libro</label>
+        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+          [(ngModel)]="currentBookStatus">
+          <mat-radio-button class="example-radio-button" value="Leido">Leido</mat-radio-button>
+          <mat-radio-button class="example-radio-button" value="Próxima lectura">Próxima lectura</mat-radio-button>
+          <mat-radio-button class="example-radio-button" value="Leyendo">Leyendo</mat-radio-button>
+        </mat-radio-group>
+        <p *ngIf="currentBookStatus == 'Leyendo'">¿Por que página vas?</p>
+        <mat-form-field color="accent" class="example-full-width" *ngIf="currentBookStatus == 'Leyendo'">
+          <input matInput placeholder="Páginas" type="number" max="{{book[0].paginas}}" [(ngModel)]="pag">
+        </mat-form-field>
+        <p *ngIf="currentBookStatus == 'Leyendo'">El libro tiene {{book[0].paginas}} páginas.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="savePageCount(pag)" (click)="modal.close()"
+          (click)="updateStatus()">Guardar</button>
+      </div>
+    </ng-template>
+    <ng-template #saveConfirm let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Añadir a favoritos</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modal.close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center">
+        <p>¿Está seguro de que quieres guardar el libro en favoritos?</p>
+        <div class="row justify-content-center">
+          <div class="col-md-4">
+            <button class="btn btn-success" (click)="modal.close()" (click)="addFav()" type="button">Aceptar</button>
+          </div>
+          <div class="col-md-4">
+            <button class="btn btn-danger" (click)="modal.close()" type="button">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </ng-template>

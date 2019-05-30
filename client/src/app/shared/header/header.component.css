@@ -1,0 +1,128 @@
+/* HEADER */
+p {
+  color: black;
+}
+
+/* CSS para que al pasar el raton sobre los iconos me cambie el fondo de color */
+
+.colIconos a:hover {
+  background-color: rgba(128, 128, 128, 0.082);
+}
+
+/* CSS para la barra navegación principal */
+
+header .colIconos {
+  text-align: center;
+  font-size: 1vw;
+}
+header .colInicial {
+  display: none;
+}
+
+header .img-fluid1 {
+  max-width: 13vw;
+  height: auto;
+}
+header .img-fluid {
+  max-width: 2vw;
+  height: auto;
+  padding-top: 1vw;
+}
+
+/* CSS para la barra de navegación cuando se hace scroll */
+
+.header3 {
+  background-color: white;
+  border-bottom: solid 0.5vw rgb(255, 204, 128);
+  position: fixed;
+  z-index: 1;
+  margin-top: -3.2vw;
+}
+
+.header3 p {
+  display: none;
+}
+
+.header3 .colCentro {
+  display: none;
+  text-align: center;
+}
+.header3 .img-fluid {
+  max-width: 2vw;
+  height: auto;
+  text-align: center;
+}
+.header3 .colInicial {
+  display: initial;
+}
+
+/* Columnas para el logo dependiendo de las pantallas */
+
+.colCentro {
+  text-align: center;
+  width: 90%;
+}
+.colCentro2 {
+  text-align: center;
+}
+
+/* Tamaño de los iconos en formato movil  */
+
+.iconosMovil {
+  text-align: center;
+  width: 25%;
+}
+
+/* Adaptación para pantallas pequeñas */
+
+@media (max-width: 600px) and (orientation: portrait) {
+  header {
+    display: none;
+  }
+  .header3 {
+    display: none;
+  }
+  .row {
+    margin-left: 0.4vw;
+  }
+  .img-fluid {
+    max-width: 6vw;
+    height: auto;
+  }
+  .img-fluid1 {
+    max-width: 20vw;
+    height: auto;
+  }
+}
+
+/* Adaptación para pantallas medianas */
+
+@media (min-width: 601px) and (max-width: 800px) and (orientation: portrait) {
+  header {
+    display: none;
+  }
+  .header3 {
+    display: none;
+  }
+  .img-fluid1 {
+    max-width: 10vw;
+    height: auto;
+    text-align: center;
+  }
+  .img-fluid {
+    max-width: 3vw;
+    height: auto;
+  }
+}
+
+/* Adaptación para pantallas mayores de 800px */
+
+@media (min-width: 801px) {
+  .header2 {
+    display: none;
+  }
+  .row {
+    margin-left: 9vw;
+    margin-right: 9vw;
+  }
+}

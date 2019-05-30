@@ -1,0 +1,83 @@
+<nav *ngIf="nav.visible">
+  <!--Para mostrar el elemento-->
+
+  <!-- Header para web -->
+
+  <header class="container-fluid">
+    <div class="row">
+      <div class="col-md-2 colInicial"></div>
+      <div class="col-md-2 col-sm-3">
+        <div class="container colIconos">
+          <a class="nav-link" [routerLink]="['/home/profile']" routerLinkActive="active"><img
+              src="https://img.icons8.com/wired/90/000000/name.png" class="img-fluid">
+            <p>Mi Perfil</p>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-3">
+        <div class="container colIconos">
+          <a class="nav-link" [routerLink]="['/home/search']" routerLinkActive="active"><img
+              src="https://img.icons8.com/wired/90/000000/books.png" class="img-fluid">
+            <p>Buscar</p>
+          </a>
+        </div>
+      </div>
+      <!-- Logo central -->
+      <div class="col-md-4 colCentro">
+        <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active"><img class="img-fluid1"
+            src="../../../assets/template (1).gif" alt="Logo"></a>
+      </div>
+      <div class="col-md-2 col-sm-3">
+        <div class="container colIconos">
+          <a class="nav-link" [routerLink]="['/home/list']" routerLinkActive="active"><img
+              src="https://img.icons8.com/wired/90/000000/book-shelf.png" class="img-fluid">
+            <p>Lecturas</p>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-3">
+        <div class="container colIconos">
+          <a class="nav-link" [routerLink]="['/home/club']" routerLinkActive="active"><img
+              src="https://img.icons8.com/wired/90/000000/myspace.png" class="img-fluid">
+            <p>Club</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Aquí comienza el segundo header para movil -->
+
+  <div class="header2">
+    <div class="container-fluid">
+      <div class="row col-md-12">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 col-sm-8 colCentro2">
+          <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active"><img class="img-fluid1"
+              src="../../../assets/template (1).gif" alt="Logo"></a>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+      <div class="row col-md-12">
+        <div class="col-sm-3 iconosMovil">
+          <a class="nav-link link" [routerLink]="['/home/profile']" routerLinkActive="active"><img
+              src="https://img.icons8.com/wired/64/000000/name.png" class="img-fluid"></a>
+        </div>
+        <div class="col-sm-3 iconosMovil">
+          <a class="nav-link link" [routerLink]="['/home/search']" routerLinkActive="active"><img
+              src="https://img.icons8.com/wired/64/000000/books.png" class="img-fluid"></a>
+        </div>
+        <div class="col-sm-3 iconosMovil">
+          <a class="nav-link link" [routerLink]="['/home/list']" routerLinkActive="active"><img
+              src="https://img.icons8.com/wired/64/000000/book-shelf.png" class="img-fluid"></a>
+        </div>
+        <div class="col-sm-3 iconosMovil">
+          <a class="nav-link link" [routerLink]="['/home/club']" routerLinkActive="active"><img
+              src="https://img.icons8.com/wired/64/000000/myspace.png" class="img-fluid"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</nav>

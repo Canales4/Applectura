@@ -1,0 +1,41 @@
+{
+  "name": "app-lectura",
+  "version": "1.0.0",
+  "description": "web application about books",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node bin/server.js",
+    "dev":"nodemon bin/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LinoHallerRios/AppLecturas.git"
+  },
+  "author": "Rosa María Barrientos, Laura del Pino, Mercedes Perea, Lino Haller Ríos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LinoHallerRios/AppLecturas/issues"
+  },
+  "homepage": "https://github.com/LinoHallerRios/AppLecturas#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.5",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.9.1",
+    "mysql": "^2.16.0",
+    "mysql2": "^1.6.5",
+    "node-wikipedia": "0.0.2",
+    "passport": "^0.4.0",
+    "sequelize": "^5.2.11",
+    "wikipedia-js": "0.0.6"
+  },
+  "devDependencies": {
+    "colors": "^1.3.3",
+    "nodemon": "^1.18.10"
+  }
+}
