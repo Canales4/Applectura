@@ -1,28 +1,19 @@
-//Aqui vamos a definir los controladores que tendra club
 var db = require('../database/db');
 
 class ClubController {
-    // //para sacar la lista entera de clubs
-    // listAll(req, res) {
-    //     db.query('SELECT * FROM club', (err, rows, fields) => {
-    //         res.json(rows);
-    //     })
-    // };
 
-    //para buscar clubs por nombre
     list(req, res) {
         const termino = `${req.params.termino}%`;
         db.query('SELECT * FROM club WHERE nomClub LIKE ?', [termino], (err, rows, fields) => {
-            if (rows.length > 0) { //si el club existe muestralo
+            if (rows.length > 0) { 
                 res.json(rows);
-            } else { //si no existe manda un error diciendo que no existe
+            } else {
                 res.status(404).json({ text: 'El club no existe' });
             }
             console.log(rows);
         })
     };
 
-    //para sacar la lista de clubs del usuario
     listClubUser(req, res) {
         const { idUser } = req.params;
         db.query('SELECT a.codClub, a.nomClub, a.presidente FROM club a LEFT JOIN socios b on (a.codClub = b.codClub) WHERE b.codUsuario = ? OR a.presidente = ? GROUP BY nomclub', [idUser, idUser], (err, rows, fields) => {
@@ -31,7 +22,6 @@ class ClubController {
         })
     };
 
-    //para sacar un club especifico
     getOne(req, res) {
         const { idClub } = req.params;
         db.query('SELECT * FROM club WHERE codClub = ?', [idClub], (err, rows, fields) => {
@@ -44,7 +34,6 @@ class ClubController {
         })
     };
 
-    //para crear un club
     create(req, res) {
         const {  presidente } = req.body;
         db.query(' INSERT INTO club set ?', [req.body], (err, rows, fields) => {
@@ -53,12 +42,11 @@ class ClubController {
                 db.query(' INSERT INTO socios (codUsuario, codClub) VALUES (?, ?)', [presidente, codClub], (err, rows, fields) => {
                     console.log(req.body);
                     res.json({ text: 'club guardado' });
-                }); 
+                });
             });
         });
     };
 
-    //Para borrar el club
     delete(req, res) {
         const { idClub } = req.params;
         db.query('DELETE FROM club WHERE codClub = ?', [idClub], (err, rows) => {
@@ -71,7 +59,6 @@ class ClubController {
         })
     };
 
-    //Para eliminar un socio
     deleteSocio(req, res) {
         const { idS } = req.params;
         db.query('DELETE FROM socios WHERE codSocio = ?', [idS], (err, rows) => {
@@ -84,7 +71,6 @@ class ClubController {
         })
     };
 
-    //para actualizar el club
     update(req, res) {
         const { idClub } = req.params;
         const { desClub } = req.body;
@@ -124,7 +110,7 @@ class ClubController {
             res.json(rows);
         })
     }
-    
+
     getMonthBook(req, res) {
         const { mes } = req.params;
         const { codClub } = req.params;
@@ -163,14 +149,12 @@ class ClubController {
         })
     }
 
-    //para sacar la lista de clubs con más socios
     listClubSocios(req, res) {
         db.query("SELECT c.nomClub AS 'nombre', COUNT(s.codClub) AS 'cuenta' FROM club c JOIN socios s on (c.codClub = s.codClub) GROUP BY c.nomClub ORDER BY 2 DESC LIMIT 5", (err, rows, fields) => {
             res.json(rows);
         })
     };
 
-    //para sacar la lista de clubs con más socios
     listSociosClubs(req, res) {
         const { idClub } = req.params;
         console.log(idClub);
