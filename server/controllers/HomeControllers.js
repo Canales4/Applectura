@@ -79,7 +79,7 @@ class HomeControllers {
   consultaFavorito(req,res){
     const { codLibro } = req.body;
     const { codUsuario } = req.body;
-    mysqlConnection.query('SELECT codFavoritos FROM favoritos WHERE codLibro = ? and codUsuario = ?',[codLibro, codUsuario] , (err, rows, next) =>{
+    db.query('SELECT codFavoritos FROM favoritos WHERE codLibro = ? and codUsuario = ?',[codLibro, codUsuario] , (err, rows, next) =>{
       if (err) console.log(err);
       res.json(rows);
       console.log(rows);
@@ -89,7 +89,7 @@ class HomeControllers {
   lastFavoriteISBN(req,res){
     const { cod } = req.params;
     console.log('Eeste es mi codigo usuario ' + cod);
-    mysqlConnection.query('SELECT * FROM (favoritos F JOIN libros L ON (F.codLibro=L.codLibro))JOIN titulo T ON (L.codTitulo=T.codTitulo) where codFavoritos=(SELECT MAX(codFavoritos)FROM favoritos where codUsuario = ?)', [cod], (err, rows, next) =>{
+    db.query('SELECT * FROM (favoritos F JOIN libros L ON (F.codLibro=L.codLibro))JOIN titulo T ON (L.codTitulo=T.codTitulo) where codFavoritos=(SELECT MAX(codFavoritos)FROM favoritos where codUsuario = ?)', [cod], (err, rows, next) =>{
       if (err) console.log(err);
       res.json(rows);
     });

@@ -4,7 +4,7 @@ class ProfileController {
 
   profDelete(req, res){
     const { codUsuario } = req.params;
-    conn.query('DELETE FROM usuario WHERE codUsuario = ?', [codUsuario], (err, rows) => {
+    db.query('DELETE FROM usuario WHERE codUsuario = ?', [codUsuario], (err, rows) => {
         if (!err) {
             res.send('eliminado');
         } else {
@@ -36,7 +36,7 @@ class ProfileController {
   conFav(req,res){
     const { codLibro } = req.body;
     const { codUsuario } = req.body;
-    conn.query('SELECT codFavoritos FROM favoritos WHERE codLibro = ? and codUsuario = ?', [codLibro, codUsuario], (err, rows, next) => {
+    db.query('SELECT codFavoritos FROM favoritos WHERE codLibro = ? and codUsuario = ?', [codLibro, codUsuario], (err, rows, next) => {
         if (err) console.log(err);
         res.json(rows);
         console.log(rows);
@@ -46,7 +46,7 @@ class ProfileController {
   lastFav(req,res){
     const { codUsuario } = req.params;
     console.log('Este es mi codigo usuario ' + codUsuario);
-    conn.query('SELECT titulo, portada FROM titulo T JOIN libros L ON(T.codTitulo= L.codTitulo) JOIN favoritos F ON(L.codlibro=F.codLibro) WHERE codUsuario = ? ORDER BY codFavoritos DESC limit 3', [codUsuario], (err, rows) => {
+    db.query('SELECT titulo, portada FROM titulo T JOIN libros L ON(T.codTitulo= L.codTitulo) JOIN favoritos F ON(L.codlibro=F.codLibro) WHERE codUsuario = ? ORDER BY codFavoritos DESC limit 3', [codUsuario], (err, rows) => {
         if (err) console.log(err);
         res.json(rows);
     });
