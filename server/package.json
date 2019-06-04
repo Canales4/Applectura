@@ -4,7 +4,7 @@
   "description": "web application about books",
   "main": "index.js",
   "scripts": {
-    "test": "node test/testsFile",
+    "test": "mocha test/testsFile",
     "start": "node bin/server.js",
     "dev": "nodemon bin/server.js"
   },
