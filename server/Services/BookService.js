@@ -3,32 +3,26 @@ var db = require('../database/db');
 class BookService {
 
   //consulta los libros por codigo usuario
-  librosUsuarios(req,res) {
-    const { codUser } = req.params;
+  librosUsuarios(codUser,res) {
     var books = db.query('SELECT T.titulo, T.ISBN, T.genero, T.anoPublicacion, T.portada, T.paginas, T.descripcion, T.editorial, T.idioma, A.nomAutor, Le.estado,  L.codLibro FROM titulo T JOIN libros L ON (T.codTitulo = L.codTitulo) JOIN autor A ON (L.codAutor = A.codAutor) JOIN lecturas Le ON (L.codLibro = Le.codLibro) WHERE Le.codUsuario = ?',[codUser] , (err, rows) => {
-        if (err) console.log(err);
-        res.json(rows);
+      if (err) {
+        console.log(err);
+      }
+      res.json(rows);
     });
-  }
+  };
 
   //consulta los libros por isbn
-  librosIsbn(req,res){
-    const { isbn } = req.params;
-    const { codUser } = req.params;
+  librosIsbn(isbn, res){
     var books = db.query('SELECT t.codTitulo, t.ISBN, t.titulo, t.genero, t.anoPublicacion, t.portada, t.paginas, t.descripcion, t.editorial, t.idioma, l.codLibro, le.estado, le.pagLec, a.codAutor, a.nomAutor FROM titulo t, libros l, autor a, lecturas le WHERE t.codTitulo = l.codTitulo AND l.codAutor = a.codAutor AND l.codLibro = le.codLibro AND t.ISBN = ?', [isbn], (err, rows) => {
-        if (err) console.log(err);
+        if (err){ console.log(err); }
         res.json(rows);
     });
-  }
+  };
 
   //modifica el estado del libro
   librosEstado(req,res){
-    const { status } = req.body;
-    const { pag } = req.body;
-    const { codTitulo } = req.body;
-    const { codUser } = req.body;
-    const { author } = req.body;
-    db.query('SELECT codAutor FROM autor WHERE nomAutor = ?', [author], (err, rows) => {
+    var books = db.query('SELECT codAutor FROM autor WHERE nomAutor = ?', [author], (err, rows) => {
         if (err) console.log(err);
         const autor = rows[0].codAutor;
         db.query('SELECT codLibro FROM libros WHERE codAutor = ? AND codTitulo = ?', [autor, codTitulo], (err, rows) => {
@@ -39,20 +33,18 @@ class BookService {
             });
         });
     });
-  }
+  };
 
   //inserta libros favoritos
   librosFavoritos(req,res){
-    const { codLibro } = req.body;
-    const { codUsuario } = req.body;
-    db.query('INSERT INTO favoritos (codLibro, codUsuario) VALUES (?, ?)', [codLibro, codUsuario], (err, rows) => {
+    var books = db.query('INSERT INTO favoritos (codLibro, codUsuario) VALUES (?, ?)', [codLibro, codUsuario], (err, rows) => {
         if (err) console.log(err);
     });
-  }
+  };
 
   libros(){
     const {codUser} = req.body;
-    var {isbn} = req.body;
+    const {isbn} = req.body;
     const {titulo} = req.body;
     const {genero} = req.body;
     const {anoPublicacion} = req.body;
@@ -156,3 +148,5 @@ class BookService {
     }
   };
 }
+
+module.exports = BookService = new BookService();

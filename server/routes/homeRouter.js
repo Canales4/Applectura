@@ -3,7 +3,7 @@ var home = express.Router();
 var controlador = require('../controllers/HomeControllers');
 
 
-home.get('/', controlador.raiz);
+home.get('/', controlador.root);
 
 home.get('/home', controlador.home);
 

@@ -1,74 +1,36 @@
 var db = require('../database/db');
+var service = require('../Services/ClubService')
 
 class ClubController {
 
     list(req, res) {
         const termino = `${req.params.termino}%`;
-        db.query('SELECT * FROM club WHERE nomClub LIKE ?', [termino], (err, rows, fields) => {
-            if (rows.length > 0) { 
-                res.json(rows);
-            } else {
-                res.status(404).json({ text: 'El club no existe' });
-            }
-            console.log(rows);
-        })
+        var lista = service.listar(termino, res);
     };
 
     listClubUser(req, res) {
         const { idUser } = req.params;
-        db.query('SELECT a.codClub, a.nomClub, a.presidente FROM club a LEFT JOIN socios b on (a.codClub = b.codClub) WHERE b.codUsuario = ? OR a.presidente = ? GROUP BY nomclub', [idUser, idUser], (err, rows, fields) => {
-            if (err) console.log(err);
-            res.json(rows);
-        })
+        var lista = service.listarClubUsuario(idUser, res);
     };
 
     getOne(req, res) {
         const { idClub } = req.params;
-        db.query('SELECT * FROM club WHERE codClub = ?', [idClub], (err, rows, fields) => {
-            if (rows.length > 0) { //si el club existe muestralo
-                res.json(rows);
-            } else { //si no existe manda un error diciendo que no existe
-                res.status(404).json({ text: 'El club no existe' });
-            }
-            console.log(rows);
-        })
+        var lista = service.cogeUno(idClub,res);
     };
 
     create(req, res) {
         const {  presidente } = req.body;
-        db.query(' INSERT INTO club set ?', [req.body], (err, rows, fields) => {
-            db.query(' SELECT codClub FROM club WHERE presidente = ? ORDER BY codClub DESC', [presidente], (err, rows, fields) => {
-                const codClub = rows[0].codClub;
-                db.query(' INSERT INTO socios (codUsuario, codClub) VALUES (?, ?)', [presidente, codClub], (err, rows, fields) => {
-                    console.log(req.body);
-                    res.json({ text: 'club guardado' });
-                });
-            });
-        });
+        var lista = service.crea(presidente, req, res);
     };
 
     delete(req, res) {
         const { idClub } = req.params;
-        db.query('DELETE FROM club WHERE codClub = ?', [idClub], (err, rows) => {
-            if (!err) {
-                res.send('Club eliminado');
-                console.log('Club eliminado');
-            } else {
-                console.log(err);
-            }
-        })
+        var lista = service.borra(idClub, res);
     };
 
     deleteSocio(req, res) {
         const { idS } = req.params;
-        db.query('DELETE FROM socios WHERE codSocio = ?', [idS], (err, rows) => {
-            if (!err) {
-                res.send('Socio eliminado');
-                console.log('Socio eliminado');
-            } else {
-                console.log(err);
-            }
-        })
+        var lista = service.borraSocio(idS, res);
     };
 
     update(req, res) {
@@ -76,57 +38,37 @@ class ClubController {
         const { desClub } = req.body;
         const { nomClub } = req.body;
         const { icono } = req.body;
-        db.query('UPDATE club set nomClub = ?, desClub = ?, icono = ? WHERE codClub = ?', [nomClub, desClub, icono, idClub], (err, rows) => {
-            if (!err) {
-                res.send('Club actualizado');
-                console.log('Club actualizado');
-            } else {
-                console.log(err);
-            }
-        })
+        var lista = service.modificacion(idClub, desClub, nomClub, icono, res);
     };
 
     joinClub(req, res) {
         const { idUser } = req.body;
         const { idClub } = req.body;
-        db.query('INSERT INTO socios (codUsuario, codClub) VALUES (?, ?)', [idUser, idClub], (err, rows) => {
-            if (err) console.log(err);
-        })
+        var lista = service.unirseClub(idUser, idClub, res);
     }
 
     leaveClub(req, res) {
         const { idUser } = req.params;
         const { idClub } = req.params;
-        db.query('DELETE FROM socios WHERE codUsuario = ? AND codClub = ?', [idUser, idClub], (err, rows) => {
-            if (err) console.log(err);
-        })
+        var lista = service.salirClub(idUser, idClub, res);
     }
 
     getSocios(req, res) {
         const { idUser } = req.params;
         const { idClub } = req.params;
-        db.query('SELECT * FROM socios WHERE codUsuario = ? AND codClub = ?', [idUser, idClub], (err, rows) => {
-            if (err) console.log(err);
-            res.json(rows);
-        })
+        var lista = service.cogerSocios(idUser, idClub, res);
     }
 
     getMonthBook(req, res) {
         const { mes } = req.params;
         const { codClub } = req.params;
-        db.query('SELECT T.*, LM.* FROM titulo T JOIN libros L ON (T.codTitulo = L.codTitulo) JOIN libromes LM ON (LM.codLibro = L.codLibro) WHERE LM.mes = ? AND LM.codClub = ?', [mes, codClub], (err, rows) => {
-            if (err) console.log(err);
-            res.json(rows);
-        })
+        var lista = service.cogerLibrodelMes(mes, codClub, res);
     }
 
     getMonthsBooks(req, res) {
         const { codClub } = req.params;
         const { month } = req.params;
-        db.query('SELECT t.titulo, t.ISBN, t.portada, lm.mes FROM libromes lm JOIN libros l ON (lm.codLibro = l.codLibro) JOIN titulo t ON (l.codTitulo = t.codTitulo) WHERE lm.codClub = ? AND lm.mes != ?', [codClub, month], (err, rows) => {
-            if (err) console.log(err);
-            res.json(rows);
-        })
+        var lista = service.cogerLibrosDelMes(codClub, month, res);
     }
 
     monthBook(req, res) {
@@ -134,33 +76,17 @@ class ClubController {
         const { idLib } = req.body;
         const { month } = req.body;
         var mes = 'none';
-        db.query('SELECT mes FROM libromes WHERE codClub = ? AND mes = ?', [idClub, month], (err, rows) => {
-            if (err) console.log(err);
-            if (rows[0]) mes = rows[0].mes;
-            if (mes === month) {
-                db.query('UPDATE libromes SET codLibro = ? WHERE mes = ? AND codClub = ?', [idLib, month, idClub], (err, rows) => {
-                    if (err) console.log(err);
-                })
-            } else {
-                db.query('INSERT INTO libromes (mes, puntuacion, codLibro, codClub) VALUES (?, 0, ?, ?)', [month, idLib, idClub], (err, rows) => {
-                    if (err) console.log(err);
-                })
-            }
-        })
+        var lista = service.mesLibro(idClub, idLib, month, res);
     }
 
     listClubSocios(req, res) {
-        db.query("SELECT c.nomClub AS 'nombre', COUNT(s.codClub) AS 'cuenta' FROM club c JOIN socios s on (c.codClub = s.codClub) GROUP BY c.nomClub ORDER BY 2 DESC LIMIT 5", (err, rows, fields) => {
-            res.json(rows);
-        })
+      var lista = service.listaClubSocios(res);
     };
 
     listSociosClubs(req, res) {
         const { idClub } = req.params;
+        var lista= service.listaSociosClub(idClub, res);
         console.log(idClub);
-        db.query("SELECT c.nomUsuario AS 'nombre', codSocio, s.codUsuario FROM usuario c JOIN socios s on (c.codUsuario = s.codUsuario) WHERE s.codClub = ? ", [idClub], (err, rows, fields) => {
-            res.json(rows);
-        })
     };
 
 }
