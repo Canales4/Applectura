@@ -4,7 +4,7 @@ const User = require('../models/User');
 process.env.SECRET_KEY = 'secret'
 
 class LoginService{
-    regitrar(){
+    regitrar(req, res){
       const today = new Date()
       const userData = {
           nomUsuario: req.body.nomUsuario,
@@ -52,7 +52,7 @@ class LoginService{
         })
     };
 
-    inicio(){
+    inicio(req, res){
       User.findOne({
           where: {
               email: req.body.email,
@@ -75,7 +75,7 @@ class LoginService{
       })
     };
 
-    perfil(){
+    perfil(req, res){
       var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY) //se verifica que el token es el mismo. decoded pillara todos los elementos de user que contengamos
       console.log('EL elemento decoded contiene' + decoded)
       User.findOne({

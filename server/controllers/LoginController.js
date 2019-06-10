@@ -4,15 +4,15 @@ class LoginController{
 
 
   register(req,res){
-    var serv = service.regitrar(res);
+    service.regitrar(req, res);
   };
 
   login(req,res){
-    var serv = service.inicio(res);
+    service.inicio(req, res);
   };
 
   profile(req,res){
-    var serv = service.perfil(res);
+    service.perfil(req, res);
   };
 }
 

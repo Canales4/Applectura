@@ -1,4 +1,3 @@
-var db = require('../database/db');
 var service = require('../Services/BookService')
 
 
@@ -11,7 +10,7 @@ class BooksControllers{
 
   booksIsbn(req,res){
     const { isbn } = req.params;
-    var books = services.librosIsbn(isbn, res);
+    var books = service.librosIsbn(isbn, res);
   };
 
   booksStatus(req, res){
@@ -19,8 +18,8 @@ class BooksControllers{
     const { pag } = req.body;
     const { codTitulo } = req.body;
     const { codUser } = req.body;
-    const { author } = req.body;
-    var books = service.librosEstado(status, pag, codTitulo, codUser, author, res);
+    const { autor } = req.body;
+    var books = service.librosEstado(status, pag, codTitulo, codUser, autor, res);
   };
 
   booksFav(req, res){
@@ -29,8 +28,8 @@ class BooksControllers{
     var books = service.librosFavoritos(codLibro, codUsuario, res);
   };
 
-  books(){
-    var books = service.libros();
+  books(req, res){
+    var books = service.libros(req, res);
   };
 }
 

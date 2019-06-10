@@ -4,7 +4,7 @@
   "description": "web application about books",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/testsFile",
+    "test": "mocha test/testRoutes/testClubRouter",
     "start": "node bin/server.js",
     "dev": "nodemon bin/server.js"
   },
@@ -29,9 +29,11 @@
     "morgan": "^1.9.1",
     "mysql": "^2.16.0",
     "mysql2": "^1.6.5",
+    "nock": "^10.0.6",
     "node-wikipedia": "0.0.2",
     "passport": "^0.4.0",
     "sequelize": "^5.2.11",
+    "sinon": "^7.3.2",
     "wikipedia-js": "0.0.6"
   },
   "devDependencies": {

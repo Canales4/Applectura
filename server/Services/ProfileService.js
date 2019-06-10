@@ -2,7 +2,7 @@ var db = require('../database/db');
 
 class ProfileService{
     borrarPerfil(codUsuario, res){
-      var prof = db.query('DELETE FROM usuario WHERE codUsuario = ?', [codUsuario], (err, rows) => {
+      db.query('DELETE FROM usuario WHERE codUsuario = ?', [codUsuario], (err, rows) => {
           if (!err) {
               res.send('eliminado');
           } else {
@@ -22,14 +22,14 @@ class ProfileService{
       const bio = req.body.bio;
       const alias = req.body.alias;
       const icono = req.body.icono;
-      const contrasena = (req.body.contrasena);
+      const contrasena = req.body.contrasena;
       const fechaNac = req.body.fechaNac;
       var sentencia = `UPDATE usuario set nomUsuario ='${nombre}', apellido1='${apellido1}', apellido2='${apellido2}', contrasena='${contrasena}', sexo='${sexo}', visibilidad ='${visi}', email ='${email}',
                        bio='${bio}', alias='${alias}', icono='${icono}', fechaNac='${fechaNac}' WHERE codUsuario = '${codUsuario}'`;
     };
 
     codigoFavorito(codLibro, codUsuario, res){
-      var prof = db.query('SELECT codFavoritos FROM favoritos WHERE codLibro = ? and codUsuario = ?', [codLibro, codUsuario], (err, rows, next) => {
+      db.query('SELECT codFavoritos FROM favoritos WHERE codLibro = ? and codUsuario = ?', [codLibro, codUsuario], (err, rows, next) => {
           if (err) console.log(err);
           res.json(rows);
           console.log(rows);
@@ -37,7 +37,7 @@ class ProfileService{
     };
 
     ultimoFavorito(codUsuario, res){
-      var prof = db.query('SELECT titulo, portada FROM titulo T JOIN libros L ON(T.codTitulo= L.codTitulo) JOIN favoritos F ON(L.codlibro=F.codLibro) WHERE codUsuario = ? ORDER BY codFavoritos DESC limit 3', [codUsuario], (err, rows) => {
+      db.query('SELECT titulo, portada FROM titulo T JOIN libros L ON(T.codTitulo= L.codTitulo) JOIN favoritos F ON(L.codlibro=F.codLibro) WHERE codUsuario = ? ORDER BY codFavoritos DESC limit 3', [codUsuario], (err, rows) => {
           if (err) console.log(err);
           res.json(rows);
       });
