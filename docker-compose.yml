@@ -19,6 +19,8 @@ services:
           - "127.0.0.1:3307:3306"
       environment:
           MYSQL_ROOT_PASSWORD: VHJL_290
+          MYSQL_USER: user290
+          MYSQL_PASSWORD: VHJL_290
       volumes:
           - /var/lib/mysql-data:/var/lib/mysql
       networks:
