@@ -16,7 +16,7 @@ services:
       image: mysql
       container_name: mysql-latest
       ports:
-          - "127.0.0.1:3307:3306"
+          - "165.22.62.165:3307:3306"
       environment:
           MYSQL_ROOT_PASSWORD: root
       volumes:
@@ -29,7 +29,7 @@ services:
         dockerfile: Dockerfile
       container_name: nginx-alpine
       ports:
-        - "127.0.0.1:8080:80"
+        - "165.22.62.165:8080:80"
       networks:
         - my-network
       links:
