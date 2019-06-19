@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  node:
+      build:
+        context: ./server
+        dockerfile: Dockerfile
+      container_name: node-latest
+      ports:
+        - "3000:3000"
+      networks:
+        - my-network
+      links:
+        - "db"
+  db:
+      image: mysql:latest
+      container_name: mysql-latest
+      ports:
+          - "127.0.0.1:3307:3306"
+      environment:
+          MYSQL_ROOT_PASSWORD: VHJL_290
+      volumes:
+          - /var/lib/mysql-data:/var/lib/mysql
+      networks:
+          - my-network
+  web:
+      build:
+        context: ./client
+        dockerfile: Dockerfile
+      container_name: nginx-alpine
+      ports:
+        - "127.0.0.1:8080:80"
+      networks:
+        - my-network
+      links:
+        - "node"
+networks:
+  my-network:

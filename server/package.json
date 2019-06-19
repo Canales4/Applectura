@@ -4,7 +4,7 @@
   "description": "web application about books",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/testRoutes/testClubRouter",
+    "test": "mocha test/testRoutes",
     "start": "node bin/server.js",
     "dev": "nodemon bin/server.js"
   },

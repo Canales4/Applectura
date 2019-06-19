@@ -4,7 +4,7 @@ class BookService {
 
 
   librosUsuarios(codUser,res) {
-    var books = db.query('SELECT T.titulo, T.ISBN, T.genero, T.anoPublicacion, T.portada, T.paginas, T.descripcion, T.editorial, T.idioma, A.nomAutor, Le.estado,  L.codLibro FROM titulo T JOIN libros L ON (T.codTitulo = L.codTitulo) JOIN autor A ON (L.codAutor = A.codAutor) JOIN lecturas Le ON (L.codLibro = Le.codLibro) WHERE Le.codUsuario = ?',[codUser] , (err, rows) => {
+    db.query('SELECT T.titulo, T.ISBN, T.genero, T.anoPublicacion, T.portada, T.paginas, T.descripcion, T.editorial, T.idioma, A.nomAutor, Le.estado,  L.codLibro FROM titulo T JOIN libros L ON (T.codTitulo = L.codTitulo) JOIN autor A ON (L.codAutor = A.codAutor) JOIN lecturas Le ON (L.codLibro = Le.codLibro) WHERE Le.codUsuario = ?',[codUser] , (err, rows) => {
       if (err) {
         console.log(err);
       }
@@ -14,7 +14,7 @@ class BookService {
 
 
   librosIsbn(isbn, res){
-    var books = db.query('SELECT t.codTitulo, t.ISBN, t.titulo, t.genero, t.anoPublicacion, t.portada, t.paginas, t.descripcion, t.editorial, t.idioma, l.codLibro, le.estado, le.pagLec, a.codAutor, a.nomAutor FROM titulo t, libros l, autor a, lecturas le WHERE t.codTitulo = l.codTitulo AND l.codAutor = a.codAutor AND l.codLibro = le.codLibro AND t.ISBN = ?', [isbn], (err, rows) => {
+    db.query('SELECT t.codTitulo, t.ISBN, t.titulo, t.genero, t.anoPublicacion, t.portada, t.paginas, t.descripcion, t.editorial, t.idioma, l.codLibro, le.estado, le.pagLec, a.codAutor, a.nomAutor FROM titulo t, libros l, autor a, lecturas le WHERE t.codTitulo = l.codTitulo AND l.codAutor = a.codAutor AND l.codLibro = le.codLibro AND t.ISBN = ?', [isbn], (err, rows) => {
         if (err){ console.log(err); }
         res.json(rows);
     });
@@ -22,7 +22,7 @@ class BookService {
 
 
   librosEstado(status, pag, codTitulo, codUser, autor, req, res){
-    var books = db.query('SELECT codAutor FROM autor WHERE nomAutor = ?', [autor], (err, rows) => {
+    db.query('SELECT codAutor FROM autor WHERE nomAutor = ?', [autor], (err, rows) => {
         if (err) console.log(err);
         const autor = rows[0].codAutor;
         db.query('SELECT codLibro FROM libros WHERE codAutor = ? AND codTitulo = ?', [autor, codTitulo], (err, rows) => {
