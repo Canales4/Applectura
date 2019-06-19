@@ -13,7 +13,7 @@ services:
       links:
         - "db"
   db:
-      image: mysql:5.7
+      image: mysql
       command: --default-authentication-plugin=mysql_native_password
       container_name: mysql-latest
       ports:
