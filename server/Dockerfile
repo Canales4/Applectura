@@ -3,4 +3,4 @@ RUN mkdir /app
 WORKDIR /app
 ADD . /app
 EXPOSE 3000
-CMD node app.js
+CMD node /bin/server.js
