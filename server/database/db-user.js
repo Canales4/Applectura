@@ -3,8 +3,8 @@ const db = {}
 const sequelize = new Sequelize("app_lecturas", "user290", "VHJL_290", { //decimos a la base de datos que nos vamos a conectar
     // host: '172.21.57.79',
     // host: '172.21.57.106',
-    host: '165.22.62.165',
-    port: '3307',
+    host: 'db',
+    port: '3306',
     dialect: "mysql",
     operatorAliases: false,
 
