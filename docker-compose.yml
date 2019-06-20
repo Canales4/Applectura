@@ -13,8 +13,8 @@ services:
       links:
         - "db"
   db:
-      image: mysql:5.7
-      container_name: mysql-5.7
+      image: mysql:latest
+      container_name: mysql-latest
       ports:
           - "165.22.62.165:3307:3306"
       volumes:
