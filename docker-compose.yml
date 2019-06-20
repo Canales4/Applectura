@@ -10,6 +10,8 @@ services:
         - "3000:3000"
       links:
         - "db"
+      networks:
+        - applectura_my-network
   db:
       build:
         context: ./database
@@ -19,6 +21,8 @@ services:
           - "165.22.62.165:3307:3306"
       volumes:
           - /var/lib/mysql-data:/var/lib/mysql
+      networks:
+        - applectura_my-network
   web:
       build:
         context: ./client
@@ -26,5 +30,9 @@ services:
       container_name: nginx-alpine
       ports:
         - "165.22.62.165:8080:80"
+      networks:
+        - applectura_my-network
       links:
         - "node"
+networks:
+  applectura_my-network:
