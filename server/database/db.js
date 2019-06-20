@@ -4,7 +4,8 @@ const mysqlConnection = mysql.createConnection({
     port: '3306',
     user: 'user_290',
     password: 'VHJL_290',
-    database: 'app_lecturas'
+    database: 'app_lecturas',
+    insecureAuth : true
 });
 
 mysqlConnection.connect((err, data) => {
