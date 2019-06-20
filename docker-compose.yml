@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3'
 
 services:
   node:
@@ -15,6 +15,11 @@ services:
   db:
       image: mysql:latest
       container_name: mysql-latest
+      environment:
+        - MYSQL_DATABASES=app_lecturas
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_USER=user_290
+        - MYSQL_PASSWORD=VHJL_290
       ports:
           - "165.22.62.165:3307:3306"
       volumes:
