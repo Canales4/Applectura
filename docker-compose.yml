@@ -14,9 +14,12 @@ services:
         - "db"
   db:
       image: mysql:latest
+      command: --default-authentication-plugin=mysql_native_password
       container_name: mysql-latest
       ports:
           - "165.22.62.165:3307:3306"
+      environment:
+        MYSQL_ROOT_PASSWORD: mypass
       volumes:
           - /var/lib/mysql-data:/var/lib/mysql
       networks:
