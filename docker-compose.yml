@@ -13,15 +13,10 @@ services:
       links:
         - "db"
   db:
-      image: mysql
+      image: mysql:latest
       container_name: mysql-latest
-      command: --default-authentication-plugin=mysql_native_password
       ports:
           - "165.22.62.165:3307:3306"
-      environment:
-          MYSQL_ROOT_PASSWORD: example
-          MYSQL_USER: user290
-          MYSQL_PASSWORD: VHJL_290
       volumes:
           - /var/lib/mysql-data:/var/lib/mysql
       networks:
