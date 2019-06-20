@@ -17,7 +17,6 @@ services:
       container_name: mysql-latest
       ports:
           - "165.22.62.165:3307:3306"
-          - "3307:3306"
       volumes:
           - /var/lib/mysql-data:/var/lib/mysql
   web:
@@ -27,6 +26,5 @@ services:
       container_name: nginx-alpine
       ports:
         - "165.22.62.165:8080:80"
-        - "8080:80"
       links:
         - "node"
