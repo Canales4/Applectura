@@ -8,8 +8,6 @@ services:
       container_name: node-latest
       ports:
         - "3000:3000"
-      networks:
-        - my-network
       links:
         - "db"
   db:
@@ -19,10 +17,9 @@ services:
       container_name: mysql-latest
       ports:
           - "165.22.62.165:3307:3306"
+          - "3307:3306"
       volumes:
           - /var/lib/mysql-data:/var/lib/mysql
-      networks:
-          - my-network
   web:
       build:
         context: ./client
@@ -30,9 +27,6 @@ services:
       container_name: nginx-alpine
       ports:
         - "165.22.62.165:8080:80"
-      networks:
-        - my-network
+        - "8080:80"
       links:
         - "node"
-networks:
-  my-network:
