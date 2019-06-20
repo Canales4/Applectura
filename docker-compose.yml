@@ -7,16 +7,16 @@ services:
         dockerfile: Dockerfile
       container_name: node-latest
       ports:
-        - "3000:3000"
+        - "165.22.62.165:3000:3000"
       networks:
         - my-network
       links:
         - "db"
   db:
-      image: mariadb
-      restart: always
-      environment:
-        MYSQL_ROOT_PASSWORD: example
+      build:
+        context: ./database
+        dockerfile: Dockerfile
+      container_name: mysql-latest
       ports:
           - "165.22.62.165:3307:3306"
       volumes:
